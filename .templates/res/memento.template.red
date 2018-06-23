@@ -18,18 +18,20 @@ Memento: [
         .text: {You must have a browser installed (Chrome, Firefox, Internet Explorer,...)}
     ]     
 
-    .text: {Goto:}
-    .links: [
-        
-    ]
-    .image: 
-    .text: {Under:}
-    .quote: {}
-    .text: {Click on:}
-    .quote: {}
-    .text: {Download:}
-    .links: [
-        
+    Download: [
+        .text: {Goto:}
+        .links: [
+            
+        ]
+        .image: 
+        .text: {Under:}
+        .quote: {}
+        .text: {Click on:}
+        .quote: {}
+        .text: {Download:}
+        .links: [
+            
+        ]
     ]
 ]
 

@@ -16,25 +16,26 @@ Memento: [
     Step-0: [
         .title: {Pre-Requisites}
         .text: {You must have a browser installed (Chrome, Firefox, Internet Explorer,...)}
-    ]     
+    ] 
 
-    .text: {Goto:}
-    .links: [
-        https://nodejs.org/en/download/
-    ]
-    .image: https://i.imgur.com/WZk8jcw.png
-    .text: {Under:}
-    .quote: {Windows or Mac}
-    .text: {and on row:}
-    .quote: {Windows Installer (.msi)}
-    .text: {Download:}
-    .links: [
-        {64-bit} https://nodejs.org/dist/v10.5.0/node-v10.5.0-x64.msi
-    ]
+    Download: [
+        .text: {Goto:}
+        .links: [
+            https://nodejs.org/en/download/
+        ]
+        .image: https://i.imgur.com/WZk8jcw.png
+        .text: {Under:}
+        .quote: {Windows or Mac}
+        .text: {and on row:}
+        .quote: {Windows Installer (.msi)}
+        .text: {Download:}
+        .links: [
+            {64-bit} https://nodejs.org/dist/v10.5.0/node-v10.5.0-x64.msi
+        ]
+    ]    
+
+
 ]
-
-do read http://readablehumanformat.com/lib.red
-markdown-gen
 
 do read http://readablehumanformat.com/lib.red
 markdown-gen

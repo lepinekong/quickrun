@@ -10,3 +10,17 @@
 ### Pre-Requisites
 
 You must have a browser installed (Chrome, Firefox, Internet Explorer,...)
+Goto:
+- [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
+                        
+![https://i.imgur.com/WZk8jcw.png](https://i.imgur.com/WZk8jcw.png)
+                    
+Under:
+>Windows or Mac
+
+and on row:
+>Windows Installer (.msi)
+
+Download:
+- [64-bit](https://nodejs.org/dist/v10.5.0/node-v10.5.0-x64.msi)
+                        
