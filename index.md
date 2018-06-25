@@ -7,9 +7,14 @@
 [http://quickrun.red//index.red](https://hub.com/lepinekong/mymementos/blob/master//index.red)
 
 
+### Installers
+
+- [Curl](./curl/curl)
+                        
+
 ### Platforms
 
-- [Nodejs](./nodejs/nodejs)
+- [Nodejs](./install/nodejs/nodejs)
                         
-- [Java](./java/java)
+- [Java](./install/java/java)
                         
