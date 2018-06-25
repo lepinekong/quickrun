@@ -18,6 +18,7 @@ Article: [
         .title: {List of installs for nodejs}
         .links: [
             {nodejs} %./nodejs
+            {yarn - a faster alternative to npm package manager } %./yarn
         ]    
     ]
 
