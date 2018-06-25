@@ -7,7 +7,7 @@ Article: [
     
     Source: [
         .title: {ReAdABLE Source [(What is the ReAdABLE Human Format?)](http://readablehumanformat.com)}
-        .text: {[http://quickrun.red//index.red](https://hub.com/lepinekong/mymementos/blob/master//index.red)
+        .text: {[http://quickrun.red/index.red](https://hub.com/lepinekong/mymementos/blob/master/index.red)
         }
         .Published-Url: http://quickrun.red/index
     ]
