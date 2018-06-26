@@ -15,7 +15,7 @@ Memento: [
 
     Step-0: [
         .title: {Pre-Requisites}
-        .text: {You must have a browser installed (Chrome, Firefox, Internet Explorer,...)}
+        .text: {For PHP test, you should have PHP server installed.}
     ]     
 
     Download: [
@@ -44,6 +44,33 @@ Memento: [
         ]
         .text: {Your server should be ready:}
         .image: https://i.imgur.com/ACj4LPw.png
+    ]
+
+    PHP: [
+        .title: {Test PHP CGI Server}
+        .text: {Create info.php in sub-folder:}
+        .quote: {http}
+        .text: {with this code snippet:}
+        .code/php: {
+<?PHP
+    phpinfo();
+?>
+        }
+        .image: https://i.imgur.com/jRfHwvh.png
+        .text: {browse to:}
+        .links: [
+            http://localhost:8080/info.php
+        ]
+        .text: {You should see this php info page:}
+        .image: https://i.imgur.com/q4YoKny.png
+        .text: {Warning: currently only get requests are supported in this early version, post requests are not yet.}
+    ]
+
+    Config: [
+        .title: {Configuration}
+        .text: {Configuration file is available in:}
+        .quote: {config.ps1}
+        .image: https://i.imgur.com/dGjz9WX.png
     ]
     
 ]
