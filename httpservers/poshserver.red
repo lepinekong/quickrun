@@ -32,8 +32,11 @@ Memento: [
     ]
 
     Install: [
-        .text: {Run exe with:}
-        .quote: {Admin Right}
+        .title: {Install}
+        .text: {Unzip the download}
+        .image: https://i.imgur.com/0FGYGTI.png
+        .text: {Run with Admin Right:}
+        .quote: {PoSHServer-Standalone.exe}
         .image: https://i.imgur.com/2OwcCOi.png
         .text: {Browse to:}
         .links: [

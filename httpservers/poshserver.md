@@ -20,8 +20,14 @@ Download:
 
 - [http://www.poshserver.net/files/PoSHServer-Standalone.v3.7.zip](http://www.poshserver.net/files/PoSHServer-Standalone.v3.7.zip)
                         
-Run exe with:
->Admin Right
+
+### Install
+
+Unzip the download
+![https://i.imgur.com/0FGYGTI.png](https://i.imgur.com/0FGYGTI.png)
+                    
+Run with Admin Right:
+>PoSHServer-Standalone.exe
 
 ![https://i.imgur.com/2OwcCOi.png](https://i.imgur.com/2OwcCOi.png)
                     
