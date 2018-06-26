@@ -17,7 +17,7 @@ Article: [
     Installers: [
         .title: {Installers}
         .links: [
-            {Curl} %./curl/curl
+            {Curl} %./install/curl/curl
         ]    
     ]      
 

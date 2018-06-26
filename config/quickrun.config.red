@@ -2,5 +2,5 @@ Red [
     Title: "quickrun.config.red"
 ]
 
-curl-path: {C:\MyUtils\curl}
-download-directory: {D:\Download}
+curl-folder: {C:\MyUtils\curl-temp}
+download-folder: {D:\Download}

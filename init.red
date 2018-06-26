@@ -2,8 +2,37 @@ Red [
     Title: "init.red"
 ]
 
-unless exists? %config/quickrun.config.red [
-    
+unless exists? config-file: %config/quickrun.config.red [
+    make-dir %config
+    write %config/quickrun.config.red read https://quickrun.red/config/quickrun.config.red
+]
+
+do read config-file
+>curl-folder: curl-folder
+>download-folder: download-folder
+
+curl-folder: to-red-file >curl-folder
+curl-local-folder: to-local-file curl-folder
+download-folder: to-red-file >download-folder
+download-local-folder: to-local-file download-folder
+
+curl-exe: to-red-file rejoin [curl-folder %curl.exe]
+curl-zip: to-red-file rejoin [curl-folder %curl.zip]
+
+unless exists? curl-folder [
+    make-dir/deep curl-folder
+    print [curl-folder "created"]
+]
+
+unless exists? %curl.exe [
+    ; download curl
+    print "downloading curl..."
+    write/binary curl-zip read/binary https://curl.haxx.se/download/curl-7.60.0.zip
+    print ["finished downloading" curl-zip]
+
+    ;unzip https://stackoverflow.com/questions/27768303/how-to-unzip-a-file-in-powershell
+    ; [System.IO.Compression.ZipFile]::ExtractToDirectory($zipfile, $outpath)
+    powershell-command: {[System.IO.Compression.ZipFile]::ExtractToDirectory($zipfile, $outpath)}
 ]
 
 ; if error? try [
