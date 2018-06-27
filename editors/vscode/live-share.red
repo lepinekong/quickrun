@@ -18,7 +18,8 @@ Memento: [
         .text: {You must have a browser installed (Chrome, Firefox, Internet Explorer,...)}
     ]     
 
-    Download: [
+    Install: [
+        .title: {Install VSCode extension}
         .text: {Goto:}
         .links: [
             https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare

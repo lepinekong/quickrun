@@ -10,6 +10,9 @@
 ### Pre-Requisites
 
 You must have a browser installed (Chrome, Firefox, Internet Explorer,...)
+
+### Install VSCode extension
+
 Goto:
 - [https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare)
                         
