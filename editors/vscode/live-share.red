@@ -45,6 +45,9 @@ Memento: [
         .text: {If success, you should see:}
         .quote: {Ready to collaborate!}
         .image: https://i.imgur.com/CGY977A.png
+        .text: {Go back to VSCode, the icon changed with your name, in the example:}
+        .quote: {Lépine}
+        .image: https://i.imgur.com/LnrFAay.png        
     ]
 
     Share: [
@@ -56,8 +59,6 @@ Memento: [
         .text: {On the bottom right, click on button:}
         .quote: {Copy}
         .image: https://i.imgur.com/YzIoRfj.png
-        .text: {Remark the icon changed with your name, in the example:}
-        .quote: {Lépine}
         .text: {You can consult security info at:}
         .links: [
             https://docs.microsoft.com/en-us/visualstudio/liveshare/reference/security

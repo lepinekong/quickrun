@@ -47,6 +47,11 @@ If success, you should see:
 
 ![https://i.imgur.com/CGY977A.png](https://i.imgur.com/CGY977A.png)
                     
+Go back to VSCode, the icon changed with your name, in the example:
+>Lépine
+
+![https://i.imgur.com/LnrFAay.png](https://i.imgur.com/LnrFAay.png)
+                    
 
 ### Share
 
@@ -61,9 +66,6 @@ On the bottom right, click on button:
 
 ![https://i.imgur.com/YzIoRfj.png](https://i.imgur.com/YzIoRfj.png)
                     
-Remark the icon changed with your name, in the example:
->Lépine
-
 You can consult security info at:
 - [https://docs.microsoft.com/en-us/visualstudio/liveshare/reference/security](https://docs.microsoft.com/en-us/visualstudio/liveshare/reference/security)
                         
