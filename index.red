@@ -12,22 +12,29 @@ Article: [
         .Published-Url: http://quickrun.red/index
     ]
 
-    Title: {Index of Codegen}  
+    Title: {Index of Quickrun}  
 
-    Installers: [
-        .title: {Installers}
-        .links: [
-            {Curl} %./install/curl/curl
-        ]    
-    ]      
+    ; Installers: [
+    ;     .title: {Installers}
+    ;     .links: [
+    ;         {Curl} %./install/curl/curl
+    ;     ]    
+    ; ]      
 
-    Platforms: [
-        .title: {Platforms}
-        .links: [
-            {Nodejs} %./install/nodejs/nodejs
-            {Java} %./install/java/java
-        ]    
-    ]
+    ; Platforms: [
+    ;     .title: {Platforms}
+    ;     .links: [
+    ;         {Nodejs} %./nodejs/nodejs
+    ;         {Java} %./java/java
+    ;     ]    
+    ; ]
+
+    ; Platforms: [
+    ;     .title: {Editors}
+    ;     .links: [
+    ;         {VSCode} %./editors/vscode/
+    ;     ]    
+    ; ]    
 
 ]  
 
