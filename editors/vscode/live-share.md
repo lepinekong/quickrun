@@ -32,7 +32,9 @@ After a few moment, click on:
 At the bottom of VSCode, click on:
 >Sign-in
 
-Select Github:
+![https://i.imgur.com/bmSqPs7.png](https://i.imgur.com/bmSqPs7.png)
+                    
+Browser opens, select Github:
 ![https://i.imgur.com/aXT6ZfJ.png](https://i.imgur.com/aXT6ZfJ.png)
                     
 Click on:

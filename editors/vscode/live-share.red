@@ -36,7 +36,8 @@ Memento: [
         .title: {Sign-in}
         .text: {At the bottom of VSCode, click on:}
         .quote: {Sign-in}
-        .text: {Select Github:}
+        .image: https://i.imgur.com/bmSqPs7.png
+        .text: {Browser opens, select Github:}
         .image: https://i.imgur.com/aXT6ZfJ.png
         .text: {Click on:}
         .quote: {Green Button "Authorize"}
