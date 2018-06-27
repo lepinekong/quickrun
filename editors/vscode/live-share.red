@@ -66,7 +66,7 @@ Memento: [
 
     Join: [
         .title: {Join Collaboration Session}
-        .text: {Open a new Workspace, Activate command and type/choose:}
+        .text: {Open a new Workspace, type/choose in command panel:}
         .quote: {Live Share: Join Collaboration Session}
         .image: https://i.imgur.com/TCW6e7P.png
         .text: {the link should be pasted automatically, so just validate:}
