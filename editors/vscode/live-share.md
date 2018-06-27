@@ -70,7 +70,7 @@ You can consult security info at:
 
 ### Join Collaboration Session
 
-Open a new VSCode Workspace, Activate command and type/choose:
+Open a new Workspace, Activate command and type/choose:
 >Live Share: Join Collaboration Session
 
 ![https://i.imgur.com/TCW6e7P.png](https://i.imgur.com/TCW6e7P.png)
