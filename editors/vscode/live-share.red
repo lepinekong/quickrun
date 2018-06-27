@@ -19,7 +19,7 @@ Memento: [
     ]     
 
     Install: [
-        .title: {Install VSCode extension}
+        .title: {Install extension}
         .text: {Goto:}
         .links: [
             https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare
