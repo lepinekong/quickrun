@@ -8,7 +8,7 @@ Memento: [
 
     Source: [
         .title: {ReAdABLE Source [(What is the ReAdABLE Human Format?)](http://readablehumanformat.com)}
-        .text: {[http://quickrun.red/<%full-domain-path%>/<%short-filename%>.red](https://github.com/lepinekong/mymementos/blob/master/<%full-domain-path%>/<%short-filename%>.red)
+        .text: {[http://quickrun.red/<%full-domain-path%>/<%short-filename%>.red](https://github.com/lepinekong/quickrun/blob/master/<%full-domain-path%>/<%short-filename%>.red)
         }
         .Published-Url: http://quickrun.red/<%full-domain-path%>/<%short-filename%>
     ]      

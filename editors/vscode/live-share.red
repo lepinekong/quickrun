@@ -8,7 +8,7 @@ Memento: [
 
     Source: [
         .title: {ReAdABLE Source [(What is the ReAdABLE Human Format?)](http://readablehumanformat.com)}
-        .text: {[http://quickrun.red/editors/vscode/live-share.red](https://github.com/lepinekong/mymementos/blob/master/editors/vscode/live-share.red)
+        .text: {[http://quickrun.red/editors/vscode/live-share.red](https://github.com/lepinekong/quickrun/blob/master/editors/vscode/live-share.red)
         }
         .Published-Url: http://quickrun.red/editors/vscode/live-share
     ]      

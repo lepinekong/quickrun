@@ -4,7 +4,7 @@
 
 ### ReAdABLE Source [(What is the ReAdABLE Human Format?)](http://readablehumanformat.com)
 
-[http://quickrun.red/editors/vscode/live-share.red](https://github.com/lepinekong/mymementos/blob/master/editors/vscode/live-share.red)
+[http://quickrun.red/editors/vscode/live-share.red](https://github.com/lepinekong/quickrun/blob/master/editors/vscode/live-share.red)
 
 
 ### Pre-Requisites
