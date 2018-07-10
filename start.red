@@ -1,5 +1,5 @@
 Red [
-    Title: "init.red"
+    Title: "start.red"
 ]
 
 unless exists? config-file: %config/quickrun.config.red [
