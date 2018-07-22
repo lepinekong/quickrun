@@ -36,5 +36,5 @@ Memento: [
 ]
 
 
-do read http://readablehumanformat.com/lib.red
+do http://readable.red
 markdown-gen

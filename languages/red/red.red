@@ -18,7 +18,8 @@ Memento: [
         .text: {You must have a browser installed (Chrome, Firefox, Internet Explorer,...)}
     ]     
 
-    Download: [
+    Stable-version: [
+        .title: {Stable version}
         .text: {Goto:}
         .links: [
             https://www.red-lang.org/p/download.html
@@ -31,6 +32,21 @@ Memento: [
             https://static.red-lang.org/dl/win/red-063.exe
         ]
     ]
+
+    Latest-build: [
+        .title: {Latest build}
+        .text: {Goto:}
+        .links: [
+            https://www.red-lang.org/p/download.html
+        ]
+        .image: https://i.imgur.com/lfPSiRm.png
+        .text: {Click on:}
+        .quote: {Red 0.6.3 for Windows}
+        .text: {Download:}
+        .links: [
+            https://static.red-lang.org/dl/win/red-063.exe
+        ]
+    ]    
 ]
 
 
