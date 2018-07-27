@@ -19,6 +19,7 @@ Memento: [
     ] 
 
     Download: [
+        .title: {Download}
         .text: {Goto:}
         .links: [
             https://nodejs.org/en/download/
@@ -37,5 +38,5 @@ Memento: [
 
 ]
 
-do read http://readablehumanformat.com/lib.red
+do http://readable.red
 markdown-gen
