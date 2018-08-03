@@ -1,5 +1,5 @@
 Red [
-    Title: ""
+    Title: "jsdoc.red"
 ]
 
 out: copy "jsdoc.red"
