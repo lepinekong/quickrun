@@ -21,6 +21,7 @@ npm: function [
     - npm list: list global packages
     - npm config: print config
     - npm <your-command>: custom command
+    - npm init: will create a default package.json
     }
     '>command "your command"
     /no-confirmation "don't ask confirmation"
@@ -35,6 +36,7 @@ npm: function [
         global "config get prefix"
         config "config list"
         list "list --global --depth=0"
+        init "init --y"
     ]
     
     if not none? true-command: select true-command-list to-word short-command [
