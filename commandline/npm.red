@@ -6,26 +6,7 @@ Red [
         https://kapeli.com/cheat_sheets/npm.docset/Contents/Resources/Documents/index
     ]
     Build: [
-        0.0.0.1 {First version}
-    ]
-    Iterations: [
-        0.0.0.1.10 {
-        For remote:
-        if error? try [
-            folder: pick split-path system/options/script 1
-        ][
-            folder: what-dir
-        ]            
-        }
-        0.0.0.1.9 {confirmation-list: [clean] - Bug no-confirmation = true instead of false}
-        0.0.0.1.8 {Search}
-        0.0.0.1.7 {Cleaning}
-        0.0.0.1.6 {initial-directory - FIXED BUG }
-        0.0.0.1.5 {initial-directory - BUG }
-        0.0.0.1.4 {release}
-        0.0.0.1.3 {code generation}
-        0.0.0.1.2 {refactoring of shortcuts-list}
-        0.0.0.1.1 {Initial version}
+        0.0.0.1.12 {First version}
     ]
 ]
 
@@ -112,8 +93,12 @@ npm: function [
     confirmation-list: [clean]
 
     no-confirmation: false
-    if find no-confirmation-list to-word short-command [
-        unless find confirmation-list to-word short-command [
+    ;found?: find no-confirmation-list to-word short-command 
+    keyword: to-word (form >command)
+    found?: find no-confirmation-list to-word keyword
+    if found? [
+        found?: find confirmation-list keyword
+        unless found? [
             no-confirmation: true
         ]
         
@@ -133,8 +118,6 @@ npm: function [
     npm-command: rejoin [{npm } short-command] 
     powershell-command: rejoin [{powershell -Command } {"} npm-command {"}]
 
-    ?? no-confirmation
-    ask ".."
     unless no-confirmation [
 
         question: rejoin [{Confirm: } npm-command { (Y="Yes" or else = Cancel): }]
