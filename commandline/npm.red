@@ -5,10 +5,7 @@ Red [
         https://docs.npmjs.com/getting-started/installing-npm-packages-locally
         https://kapeli.com/cheat_sheets/npm.docset/Contents/Resources/Documents/index
     ]
-    Build: [0.0.0.1.16 {First version}]
-    Iterations: [
-        0.0.0.1.17 {do https://redlang.red/cd}
-    ]
+    Build: [0.0.0.1.18 {First version}]
 ]
 
 do https://redlang.red/cd
