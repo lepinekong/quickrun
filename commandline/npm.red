@@ -32,7 +32,7 @@ npm: function [
         version "--version"
         global "config get prefix"
         config "config list"
-        list "list --global"
+        list "list --global --depth=0"
     ]
     
     if not none? true-command: select true-command-list to-word short-command [
