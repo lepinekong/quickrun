@@ -5,10 +5,11 @@ Red [
         https://docs.npmjs.com/getting-started/installing-npm-packages-locally
         https://kapeli.com/cheat_sheets/npm.docset/Contents/Resources/Documents/index
     ]
-    Build: [0.0.0.1.18 {First release}]
+    Build: [0.0.0.1.18 {First version}]
 ]
 
 do https://redlang.red/cd
+do https://redlang.red/do-trace
 
 npm: function [
     {Usage: 
@@ -131,6 +132,10 @@ npm: function [
         ]
         
         ans: ask question
+        do-trace 136 [
+            ?? ans
+        ] %npm.19.red
+        
 
         if ans <> "Y" [
             return ans
