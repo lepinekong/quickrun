@@ -143,15 +143,6 @@ npm: function [
     return out
 ]
 
-list: function [/locally][
-    npm-command: "list"
-    either locally [
-        npm/no-confirmation/locally (npm-command)         
-    ][
-        npm/no-confirmation (npm-command)          
-    ]
-]
-
 install: function [
     {Will install a package with options
 
@@ -323,5 +314,16 @@ docs: function ['>package][
 
 npm/boot
 print "" ; weird without this line next line doesn't execute
+
+list: function [/locally][
+    npm-command: "list"
+    either locally [
+        npm/no-confirmation/locally (npm-command)         
+    ][
+        npm/no-confirmation (npm-command)          
+    ]
+]
+
+
 help npm
 print {Type "help npm" to show this help again}
