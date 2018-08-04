@@ -170,7 +170,17 @@ install: function [
 
     ans: "N"
     unless locally [
+
+        ;do read http://redlang.red/do-trace
+        do-trace 174 [
+        ] %npm.19.red
+        
         ans: npm (npm-command)
+
+        ;do read http://redlang.red/do-trace
+        do-trace 180 [
+        ] %npm.19.red
+        
     ]
 
     either (ans = "O") or locally [
