@@ -143,6 +143,15 @@ npm: function [
     return out
 ]
 
+list: function [/locally][
+    npm-command: "list"
+    either locally [
+        npm/no-confirmation/locally (npm-command)         
+    ][
+        npm/no-confirmation (npm-command)          
+    ]
+]
+
 install: function [
     {Will install a package with options
 
