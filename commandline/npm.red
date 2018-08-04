@@ -18,12 +18,14 @@ npm: function [
     {Usage: 
     - npm version: get version
     - npm global: get global install directory
+    - npm list: list global packages
+    - npm config: print config
     - npm <your-command>: custom command
     }
     '>command "your command"
     /no-confirmation "don't ask confirmation"
     /no-options "don't propose options"
-    /init
+    /boot
 ][
 
     short-command: form >command
@@ -41,7 +43,7 @@ npm: function [
     
     shortcuts-list: extract true-command-list 2 
 
-    if init [
+    if boot [
         forall shortcuts-list [
             shortcut: shortcuts-list/1
             block-code: copy [npm]
@@ -96,5 +98,5 @@ npm: function [
 ;npm cache
 ;npm config
 
-npm/init
+npm/boot
 print "" ; weird without this line next line doesn't execute
