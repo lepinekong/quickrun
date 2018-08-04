@@ -5,9 +5,7 @@ Red [
         https://docs.npmjs.com/getting-started/installing-npm-packages-locally
         https://kapeli.com/cheat_sheets/npm.docset/Contents/Resources/Documents/index
     ]
-    Build: [
-        0.0.0.1.12 {First version}
-    ]
+    Build: [0.0.0.1.16 {First version}]
 ]
 
 
@@ -25,6 +23,7 @@ npm: function [
     /no-confirmation "don't ask confirmation"
     /no-options "don't propose options"
     /boot "internal usage only"
+    /locally "force locally"
     /local initial-directory
 ][
 
@@ -49,7 +48,7 @@ npm: function [
     short-command: form >command
 
     ;-------------------------------------------------
-    true-command-list: [
+    true-command-list: copy [ ; BUG due to lack of copy
         version "--version" {}
         global "config get prefix" {}
         config "config list" {}
@@ -57,12 +56,18 @@ npm: function [
         clean "cache clean --force" {Sometimes npm's cache gets confused. You can reset it}
     ]
 
-    json-file: to-red-file rejoin [initial-directory/1 %package.json]
-    either exists? json-file [
+    either locally [
         append true-command-list  [list "list" {}]
     ][
-        append true-command-list  [list "list --global --depth=0" {}]
+        json-file: to-red-file rejoin [initial-directory/1 %package.json]
+        either exists? json-file [
+            append true-command-list  [list "list" {}]
+        ][
+            append true-command-list  [list "list --global --depth=0" {}]
+        ]
     ]
+
+
     ;-------------------------------------------------
     
     if not none? true-command: select true-command-list to-word short-command [
@@ -101,7 +106,6 @@ npm: function [
         unless found? [
             no-confirmation: true
         ]
-        
     ]
 
     ;-------------------------------------------------
@@ -163,7 +167,7 @@ install: function [
         ans: npm (npm-command)
     ]
 
-    if (ans = "O") or locally [
+    either (ans = "O") or locally [
         replace npm-command {-g } {}
         Print replace/all {Do you want to:
             1.1 install <%package%> locally and save it in dependencies (package.json created if necessary)
@@ -191,6 +195,11 @@ install: function [
         ][
             return false
         ]
+        npm/no-confirmation (npm-command) 
+        npm-command: "list"
+        npm/no-confirmation/locally (npm-command) 
+    ][
+        npm-command: "list --global --depth=0"
         npm/no-confirmation (npm-command) 
     ]
 ]
@@ -248,34 +257,39 @@ uninstall: function [
         ans: npm (npm-command)
     ]
 
-    if (ans = "O") or locally [
+    either (ans = "O") or locally [
         replace npm-command {-g } {}
-        Print replace/all {Do you want to:
-            1.1 uninstall <%package%> locally and save it in dependencies (package.json created if necessary)
-            1.2 uninstall <%package%> locally and save it in devDependencies (package.json created if necessary)
-            1.3 uninstall <%package%> locally and save it in optionalDependencies (package.json created if necessary)
-            2. uninstall <%package%> locally without saving it to your local package.json
-        } {<%package%>} package
-        ans: ask "Select Option number or else to Cancel: "
-        switch/default ans [
-            "1.1" [
-                if not exists? %package.json [init]
-                npm-command: rejoin [npm-command { --save}]               
-            ]
-            "1.2" [
-                if not exists? %package.json [init]
-                npm-command: rejoin [npm-command { --save-dev}]               
-            ]      
-            "1.3" [
-                if not exists? %package.json [init]
-                npm-command: rejoin [npm-command { --save-optional}]               
-            ]                   
-            "2" [
-                ;npm/no-confirmation (npm-command)
-            ]
-        ][
-            return false
-        ]
+        ; Print replace/all {Do you want to:
+        ;     1.1 uninstall <%package%> locally and save it in dependencies (package.json created if necessary)
+        ;     1.2 uninstall <%package%> locally and save it in devDependencies (package.json created if necessary)
+        ;     1.3 uninstall <%package%> locally and save it in optionalDependencies (package.json created if necessary)
+        ;     2. uninstall <%package%> locally without saving it to your local package.json
+        ; } {<%package%>} package
+        ; ans: ask "Select Option number or else to Cancel: "
+        ; switch/default ans [
+        ;     "1.1" [
+        ;         if not exists? %package.json [init]
+        ;         npm-command: rejoin [npm-command { --save}]               
+        ;     ]
+        ;     "1.2" [
+        ;         if not exists? %package.json [init]
+        ;         npm-command: rejoin [npm-command { --save-dev}]               
+        ;     ]      
+        ;     "1.3" [
+        ;         if not exists? %package.json [init]
+        ;         npm-command: rejoin [npm-command { --save-optional}]               
+        ;     ]                   
+        ;     "2" [
+        ;         ;npm/no-confirmation (npm-command)
+        ;     ]
+        ; ][
+        ;     return false
+        ; ]
+        npm/no-confirmation (npm-command) 
+        npm-command: "list"
+        npm/no-confirmation/locally (npm-command) 
+    ][
+        npm-command: "list --global --depth=0"
         npm/no-confirmation (npm-command) 
     ]
 ]
