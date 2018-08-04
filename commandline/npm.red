@@ -215,6 +215,63 @@ update: function [
     npm/no-options (npm-command)
 ]
 
+uninstall: function [
+    {Will uninstall a package with options
+
+    Usage examples:
+        - uninstall jsdoc
+        - uninstall/locally underscore@1.8.2
+        - uninstall/locally/version underscore 1.8.2
+    }
+    '>package 
+    /version {precise version} '>version {semantic version: major.minor.patch}
+    /locally
+    ][
+    package: form >package
+    >version: form >version
+    if version [
+        package: rejoin [package {@} >version]
+    ]
+
+    npm-command: rejoin [{uninstall } {-g } package]
+
+    ans: "N"
+    unless locally [
+        ans: npm (npm-command)
+    ]
+
+    if (ans = "O") or locally [
+        replace npm-command {-g } {}
+        Print replace/all {Do you want to:
+            1.1 uninstall <%package%> locally and save it in dependencies (package.json created if necessary)
+            1.2 uninstall <%package%> locally and save it in devDependencies (package.json created if necessary)
+            1.3 uninstall <%package%> locally and save it in optionalDependencies (package.json created if necessary)
+            2. uninstall <%package%> locally without saving it to your local package.json
+        } {<%package%>} package
+        ans: ask "Select Option number or else to Cancel: "
+        switch/default ans [
+            "1.1" [
+                if not exists? %package.json [init]
+                npm-command: rejoin [npm-command { --save}]               
+            ]
+            "1.2" [
+                if not exists? %package.json [init]
+                npm-command: rejoin [npm-command { --save-dev}]               
+            ]      
+            "1.3" [
+                if not exists? %package.json [init]
+                npm-command: rejoin [npm-command { --save-optional}]               
+            ]                   
+            "2" [
+                ;npm/no-confirmation (npm-command)
+            ]
+        ][
+            return false
+        ]
+        npm/no-confirmation (npm-command) 
+    ]
+]
+
 search: function ['>package][
     package: form >package
     npm-command: rejoin [{search} { } package]
