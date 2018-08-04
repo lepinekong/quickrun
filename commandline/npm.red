@@ -26,7 +26,7 @@ npm: function [
     '>command "your command"
     /no-confirmation "don't ask confirmation"
     /no-options "don't propose options"
-    /boot
+    /boot "internal usage only"
 ][
 
     short-command: form >command
