@@ -48,9 +48,11 @@ npm: function [
             append initial-directory what-dir
         ]
     ] 
+    
 
     short-command: form >command
 
+    ;-------------------------------------------------
     true-command-list: [
         version "--version"
         global "config get prefix"
@@ -64,13 +66,15 @@ npm: function [
     ][
         append true-command-list  [list "list --global --depth=0"]
     ]
+    ;-------------------------------------------------
     
     if not none? true-command: select true-command-list to-word short-command [
         short-command: true-command
-    ]
+    ]    
     
+    ;-------------------------------------------------
     shortcuts-list: extract true-command-list 2 
-    append shortcuts-list [cache ls outdated]
+    append shortcuts-list [cache ls outdated shrinkwrap]
 
     if boot [        
         ; code generation for keyword functions
@@ -85,6 +89,7 @@ npm: function [
         ]
         return true
     ]
+    ;-------------------------------------------------
 
     append shortcuts-list 'cache
     no-confirmation-list: shortcuts-list
@@ -135,22 +140,29 @@ install: function [
     }
     '>package 
     /version {precise version} '>version {semantic version: major.minor.patch}
+    /locally
     ][
     package: form >package
     >version: form >version
     if version [
         package: rejoin [package {@} >version]
     ]
+
     npm-command: rejoin [{install } {-g } package]
-    ans: npm (npm-command)
-    if ans = "O" [
+
+    ans: "N"
+    unless locally [
+        ans: npm (npm-command)
+    ]
+
+    if (ans = "O") or locally [
         replace npm-command {-g } {}
-        Print {Do you want to:
-            1.1 install locally and save in dependencies (package.json created if necessary)
-            1.2 install locally and save in devDependencies (package.json created if necessary)
-            1.3 install locally and save in optionalDependencies (package.json created if necessary)
-            2. install locally without saving to your local package.json
-        }
+        Print replace/all {Do you want to:
+            1.1 install <%package%> locally and save it in dependencies (package.json created if necessary)
+            1.2 install <%package%> locally and save it in devDependencies (package.json created if necessary)
+            1.3 install <%package%> locally and save it in optionalDependencies (package.json created if necessary)
+            2. install <%package%> locally without saving it to your local package.json
+        } {<%package%>} package
         ans: ask "Select Option number or else to Cancel: "
         switch/default ans [
             "1.1" [
@@ -178,23 +190,40 @@ install: function [
 update: function [
     {Update package}
     '>package {package name or all}
+    /global
 ][
     
     package: form >package
 
     outdated
     either package = "all" [
-        npm/no-options update
+        npm-command: 'update
     ][
         npm-command: rejoin [{update } package]
-        npm/no-options npm-command
     ]
-
+    either global [
+        npm-command: rejoin [npm-command { } {-g}]
+    ][
+        if package = "npm" [
+            ans: ask {Do you want to update npm package globally ("Y" = "YES"): }
+            if ans = "Y" [
+                npm-command: rejoin [npm-command { } {-g}]
+            ]
+        ]
+    ]
+    
+    npm/no-options (npm-command)
 ]
 
 search: function ['>package][
     package: form >package
-    npm-command: rejoin [{search } package]
+    npm-command: rejoin [{search} { } package]
+    npm/no-confirmation (npm-command) 
+]
+
+docs: function ['>package][
+    package: form >package
+    npm-command: rejoin [{docs} { } package]
     npm/no-confirmation (npm-command) 
 ]
 
