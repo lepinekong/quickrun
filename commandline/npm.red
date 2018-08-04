@@ -6,8 +6,12 @@ Red [
         https://kapeli.com/cheat_sheets/npm.docset/Contents/Resources/Documents/index
     ]
     Build: [0.0.0.1.16 {First version}]
+    Iterations: [
+        0.0.0.1.17 {do https://redlang.red/cd}
+    ]
 ]
 
+do https://redlang.red/cd
 
 npm: function [
     {Usage: 
