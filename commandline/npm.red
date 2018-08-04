@@ -135,8 +135,8 @@ install: function [
 
     Usage examples:
         - install jsdoc
-        - install underscore@1.8.2
-        - install/version underscore 1.8.2
+        - install/locally underscore@1.8.2
+        - install/locally/version underscore 1.8.2
     }
     '>package 
     /version {precise version} '>version {semantic version: major.minor.patch}
