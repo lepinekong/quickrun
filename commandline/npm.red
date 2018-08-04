@@ -16,12 +16,12 @@ Red [
 
 npm: function [
     {Usage: 
-    - npm version: get version
-    - npm global: get global install directory
-    - npm list: list global packages
-    - npm config: print config
+    - version or npm version: get version
+    - global or npm global: get global install directory
+    - list or npm list: list global packages
+    - config or npm config: print config
+    - init or npm init: will create a default package.json    
     - npm <your-command>: custom command
-    - npm init: will create a default package.json
     }
     '>command "your command"
     /no-confirmation "don't ask confirmation"
@@ -46,6 +46,9 @@ npm: function [
     shortcuts-list: extract true-command-list 2 
 
     if boot [
+        ; code generation for keyword functions
+        ; example for list keyword:
+        ; list: function[][npm list]
         forall shortcuts-list [
             shortcut: shortcuts-list/1
             block-code: copy [npm]
