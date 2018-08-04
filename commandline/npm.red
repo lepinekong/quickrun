@@ -25,7 +25,7 @@ npm: function [
     npm-command: rejoin [{npm } short-command] 
     powershell-command: rejoin [{powershell -Command } {"} npm-command {"}]
     unless no-confirmation [
-        ans: ask rejoin [{Confirm: } npm-command { (Y="Yes" O="Options" else = Cancel): }] 
+        ans: ask rejoin [{Confirm: } npm-command { (Y="Yes" O="Options" or else = Cancel): }] 
         if ans <> "Y" [
             return ans
         ]
