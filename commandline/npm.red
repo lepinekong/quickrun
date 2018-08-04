@@ -15,9 +15,9 @@ Red [
 
 npm: function [
     {Usage: 
-    - npm version
-    - npm folder
-    - npm <your-command>
+    - npm version: get version
+    - npm global: get global install directory
+    - npm <your-command>: custom command
     }
     '>command "your command"
     /no-confirmation "don't ask confirmation"
@@ -25,13 +25,32 @@ npm: function [
 ][
 
     short-command: form >command
+    no-confirmation-list: [
+        version 
+        global 
+        config 
+        cache 
+        list
+    ]
+
+    if find no-confirmation-list to-word short-command [
+        no-confirmation: true
+    ]
 
     switch short-command [
         "version" [
             short-command: "--version"
-            no-confirmation: true
         ]
-        "folder" [
+        "list" [
+            short-command: "list --global"
+        ]
+        "global" [
+            short-command: "config get prefix"
+        ]
+        "config" [
+            short-command: "config list"         
+        ]
+        "cache" [
             folder: rejoin [get-env "APPDATA" {\} "npm-cache"]
             unless value? 'explorer [
                 do https://redlang.red/explorer
@@ -64,5 +83,24 @@ npm: function [
 ]
 
 ;help npm
+;npm version
+;npm cache
+;npm config
 
+version: does [
+    npm version
+]
 
+global: does [
+    npm global
+]
+
+config: does [
+    npm config
+]
+
+list: does [
+    npm list
+]
+
+list
