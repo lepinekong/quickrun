@@ -316,3 +316,5 @@ docs: function ['>package][
 
 npm/boot
 print "" ; weird without this line next line doesn't execute
+help npm
+print {Type "help npm" to show this help again}
