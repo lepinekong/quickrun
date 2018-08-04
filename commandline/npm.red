@@ -16,6 +16,7 @@ Red [
 npm: function [
     {Usage: 
     - npm version
+    - npm folder
     - npm <your-command>
     }
     '>command "your command"
@@ -29,6 +30,15 @@ npm: function [
         "version" [
             short-command: "--version"
             no-confirmation: true
+        ]
+        "folder" [
+            folder: rejoin [get-env "APPDATA" {\} "npm-cache"]
+            unless value? 'explorer [
+                do https://redlang.red/explorer
+            ]
+            ;call/wait rejoin [{start explorer } {"} folder {"}]
+            explorer folder
+            return true
         ]
     ]
     npm-command: rejoin [{npm } short-command] 
