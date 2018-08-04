@@ -9,6 +9,14 @@ Red [
         0.0.0.1 {First version}
     ]
     Iterations: [
+        0.0.0.1.10 {
+        For remote:
+        if error? try [
+            folder: pick split-path system/options/script 1
+        ][
+            folder: what-dir
+        ]            
+        }
         0.0.0.1.9 {confirmation-list: [clean] - Bug no-confirmation = true instead of false}
         0.0.0.1.8 {Search}
         0.0.0.1.7 {Cleaning}
@@ -42,7 +50,13 @@ npm: function [
     initial-directory: copy []
 
     if empty? initial-directory [
-        folder: pick split-path system/options/script 1
+
+        if error? try [
+            folder: pick split-path system/options/script 1
+        ][
+            folder: what-dir
+        ]
+
         either not none? folder [
             append initial-directory folder
         ][
