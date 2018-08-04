@@ -20,7 +20,7 @@ npm: function [
     }
     '>command "your command"
     /no-confirmation "don't ask confirmation"
-    /no-options
+    /no-options "don't propose options"
 ][
 
     short-command: form >command
