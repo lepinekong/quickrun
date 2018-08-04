@@ -6,28 +6,18 @@ Red [
 ]
 
 do https://quickrun.red/npm
+ans: npm "install -g jsdoc"
 
-; npm: function [short-command /no-confirmation][
-;     npm-command: rejoin [{npm } short-command] 
-;     powershell-command: rejoin [{powershell -Command } {"} npm-command {"}]
-;     unless no-confirmation [
-;         ans: ask rejoin [{Confirm: } npm-command { (Y="Yes" O="Options" else = Cancel)}] 
-;         either ans <> "Y" [
-;             return ans
-;         ][
-;             call/wait/output powershell-command out 
-;         ]
-;     ]
+; out: copy ""
+
+; npm-command: {npm install -g jsdoc}
+; ans: ask rejoin [{Confirm: } npm-command { (Y="Yes" O="Options" else = Cancel): }]
+; powershell-command: rejoin [{powershell -Command } {"} npm-command {"}]
+
+; if ans = "Y" [
+;     call/wait/output powershell-command out
+;     print out
 ; ]
-
-out: copy "jsdoc.red"
-npm-command: {npm install -g jsdoc}
-ans: ask rejoin [{Confirm: } npm-command { (Y="Yes" O="Options" else = Cancel)}]
-powershell-command: rejoin [{powershell -Command } {"} npm-command {"}]
-if ans = "Y" [
-    call/wait/output powershell-command out
-    print out
-]
 
 if ans = "O" [
     print {
@@ -36,12 +26,14 @@ if ans = "O" [
     }
     ans: ask "Select Option number or else to Cancel: "
     if ans = "1" [
-        call/wait/output powershell-command out
-        print out        
+        npm "install -g jsdoc"
+        ; call/wait/output powershell-command out
+        ; print out        
     ]
     if ans = "2" [
-        npm-command: {npm install jsdoc --save}
-        powershell-command: rejoin [{powershell -Command } {"} npm-command {"}]
-        call/wait/output powershell-command out
+        ; npm-command: {npm install jsdoc --save}
+        ; powershell-command: rejoin [{powershell -Command } {"} npm-command {"}]
+        ; call/wait/output powershell-command out
+        npm {npm install jsdoc --save}
     ]
 ]
