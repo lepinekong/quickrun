@@ -9,6 +9,7 @@ Red [
         0.0.0.1 {First version}
     ]
     Iterations: [
+        0.0.0.1.9 {confirmation-list: [clean] - Bug no-confirmation = true instead of false}
         0.0.0.1.8 {Search}
         0.0.0.1.7 {Cleaning}
         0.0.0.1.6 {initial-directory - FIXED BUG }
@@ -54,17 +55,18 @@ npm: function [
 
     ;-------------------------------------------------
     true-command-list: [
-        version "--version"
-        global "config get prefix"
-        config "config list"
-        init "init --y"
+        version "--version" {}
+        global "config get prefix" {}
+        config "config list" {}
+        init "init --y" {}
+        clean "cache clean --force" {Sometimes npm's cache gets confused. You can reset it}
     ]
 
     json-file: to-red-file rejoin [initial-directory/1 %package.json]
     either exists? json-file [
-        append true-command-list  [list "list"]
+        append true-command-list  [list "list" {}]
     ][
-        append true-command-list  [list "list --global --depth=0"]
+        append true-command-list  [list "list --global --depth=0" {}]
     ]
     ;-------------------------------------------------
     
@@ -73,7 +75,7 @@ npm: function [
     ]    
     
     ;-------------------------------------------------
-    shortcuts-list: extract true-command-list 2 
+    shortcuts-list: extract true-command-list 3 
     append shortcuts-list [cache ls outdated shrinkwrap]
 
     if boot [        
@@ -93,11 +95,17 @@ npm: function [
 
     append shortcuts-list 'cache
     no-confirmation-list: shortcuts-list
+    confirmation-list: [clean]
 
+    no-confirmation: false
     if find no-confirmation-list to-word short-command [
-        no-confirmation: true
+        unless find confirmation-list to-word short-command [
+            no-confirmation: true
+        ]
+        
     ]
 
+    ;-------------------------------------------------
     switch short-command [
         "cache" [
             folder: rejoin [get-env "APPDATA" {\} "npm-cache"]
@@ -110,6 +118,9 @@ npm: function [
     ]
     npm-command: rejoin [{npm } short-command] 
     powershell-command: rejoin [{powershell -Command } {"} npm-command {"}]
+
+    ?? no-confirmation
+    ask ".."
     unless no-confirmation [
 
         question: rejoin [{Confirm: } npm-command { (Y="Yes" or else = Cancel): }]
