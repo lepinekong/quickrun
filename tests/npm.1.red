@@ -132,9 +132,9 @@ npm: function [
         ]
         
         ans: ask question
-        ; do-trace 136 [
-        ;     ?? ans
-        ; ] %npm.19.red
+        do-trace 136 [
+            ?? ans
+        ] %npm.19.red
         
 
         if ans <> "Y" [
