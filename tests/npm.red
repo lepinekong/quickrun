@@ -138,6 +138,7 @@ npm: function [
         
 
         if ans <> "Y" [
+            print "Line below bugged, why?"
             return ans
         ]
     ]
