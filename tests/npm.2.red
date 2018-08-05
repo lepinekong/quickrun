@@ -10,8 +10,6 @@ Red [
 
 do https://redlang.red/cd
 do https://redlang.red/do-trace
-do https://redlang.red/do-events
-
 
 npm: function [
     {Usage: 
@@ -137,7 +135,6 @@ npm: function [
         ; do-trace 136 [
         ;     ?? ans
         ; ] %npm.19.red
-        .do-events/no-wait
         
 
         if ans <> "Y" [
