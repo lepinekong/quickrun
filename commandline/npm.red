@@ -4,12 +4,15 @@ Red [
         https://www.sitepoint.com/beginners-guide-node-package-manager/
         https://docs.npmjs.com/getting-started/installing-npm-packages-locally
         https://kapeli.com/cheat_sheets/npm.docset/Contents/Resources/Documents/index
+        https://firstdoit.com/no-need-for-globals-using-npm-dependencies-in-npm-scripts-3dfb478908
+
+        https://medium.freecodecamp.org/how-to-make-a-beautiful-tiny-npm-package-and-publish-it-2881d4307f78
     ]
-    Build: [0.0.0.1.18 {First version}]
+    Build: [0.0.0.1.20 {First version}]
 ]
 
 do https://redlang.red/cd
-do https://redlang.red/do-trace
+do https://redlang.red/do-events
 
 npm: function [
     {Usage: 
@@ -132,10 +135,7 @@ npm: function [
         ]
         
         ans: ask question
-        do-trace 136 [
-            ?? ans
-        ] %npm.19.red
-        
+        .do-events/no-wait
 
         if ans <> "Y" [
             return ans
@@ -170,16 +170,10 @@ install: function [
 
     ans: "N"
     unless locally [
-
-        ;do read http://redlang.red/do-trace
-        do-trace 174 [
-        ] %npm.19.red
         
+        .do-events/no-wait
         ans: npm (npm-command)
-
-        ;do read http://redlang.red/do-trace
-        do-trace 180 [
-        ] %npm.19.red
+        .do-events/no-wait
         
     ]
 
