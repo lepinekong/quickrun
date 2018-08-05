@@ -9,7 +9,7 @@ Red [
 ]
 
 do https://redlang.red/cd
-do https://redlang.red/do-trace
+do https://redlang.red/do-trace ; to-remove
 do https://redlang.red/do-events
 
 
