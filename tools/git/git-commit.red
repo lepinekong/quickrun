@@ -20,9 +20,7 @@ unless value? '.string-expand [
     do https://redlang.red/string-expand
 ]
 
-unless value? 'syscd [
-    do https://redlang.red/cd
-]
+do https://redlang.red/cd
 
 
 .git-commit: function ['>message][
