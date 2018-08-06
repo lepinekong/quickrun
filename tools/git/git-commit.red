@@ -4,6 +4,7 @@ Red [
         0.0.0.1 {Initial build}
     ]
     Iterations: [
+        4 {push option}
         3 {
 unless value? 'syscd [
     do https://redlang.red/cd
@@ -23,11 +24,11 @@ unless value? '.string-expand [
 do https://redlang.red/cd
 
 
-.git-commit: function ['>message][
+.git-commit: function ['>message /no-push][
 
     message: form >message
     folder: to-local-file what-dir
-    command-template: {set-location '<%folder%>';git add -A -- .;git commit -m "<%message%>"}
+    command-template: {set-location '<%folder%>';git add -A -- .;git commit -m "<%message%>";git push}
     command: .expand command-template [
         folder: (folder)
         message: (message)
