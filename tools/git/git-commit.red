@@ -21,7 +21,7 @@ unless value? '.string-expand [
     do https://redlang.red/string-expand
 ]
 
-do https://redlang.red/cd
+do https://redlang.red/cd ; cd doesn't work
 
 
 .git-commit: function ['>message /no-push][
@@ -29,6 +29,9 @@ do https://redlang.red/cd
     message: form >message
     folder: to-local-file what-dir
     command-template: {set-location '<%folder%>';git add -A -- .;git commit -m "<%message%>";git push}
+    if no-push [
+        command-template: {set-location '<%folder%>';git add -A -- .;git commit -m "<%message%>"}
+    ]
     command: .expand command-template [
         folder: (folder)
         message: (message)
