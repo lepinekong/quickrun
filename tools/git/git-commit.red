@@ -1,5 +1,15 @@
 Red [
     Title: "git-commit.1.red"
+    Builds: [
+        0.0.0.1 {Initial build}
+    ]
+    Iterations: [
+        3 {
+unless value? 'syscd [
+    do https://redlang.red/cd
+]
+        }
+    ]
 ]
 
 unless value? '.call-powershell [
@@ -9,6 +19,11 @@ unless value? '.call-powershell [
 unless value? '.string-expand [
     do https://redlang.red/string-expand
 ]
+
+unless value? 'syscd [
+    do https://redlang.red/cd
+]
+
 
 .git-commit: function ['>message][
 
