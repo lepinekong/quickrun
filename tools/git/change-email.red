@@ -1,5 +1,8 @@
 Red [
     Title: "change-email.1.red"
+    .links: [
+        https://help.github.com/articles/setting-your-commit-email-address-in-git/
+    ]
 ]
 
 
