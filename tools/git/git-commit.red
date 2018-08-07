@@ -8,12 +8,7 @@ Red [
             - when msg passed as variable must use ()
             - double powershell printing log
         }
-        4 {push option}
-        3 {
-unless value? 'syscd [
-    do https://redlang.red/cd
-]
-        }
+        4 {/no-push}
     ]
 ]
 
