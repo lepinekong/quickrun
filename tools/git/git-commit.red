@@ -4,6 +4,10 @@ Red [
         0.0.0.1 {Initial build}
     ]
     Iterations: [
+        5 {fix annoyances
+            - when msg passed as variable must use ()
+            - double powershell printing log
+        }
         4 {push option}
         3 {
 unless value? 'syscd [
@@ -37,11 +41,11 @@ do https://redlang.red/cd ; cd doesn't work
         message: (message)
     ]
 
-    print "starting..."
+    print "starting git commit..."
     unless error? try [
         .call-powershell/out command
     ] [
-        print ["done"]
+        print ["commit done"]
         return true
     ]
     return false
