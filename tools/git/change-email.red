@@ -6,7 +6,10 @@ Red [
 ]
 
 
-.change-email: function ['>email [string! email! unset!]][
+.change-email: function [
+    '>email [string! email! unset!]
+    /github-no-reply
+][
 
     switch/default type?/word get/any '>email [
         unset! [
@@ -20,7 +23,12 @@ Red [
     ]    
 
     folder: to-local-file what-dir
-    command-template: {git config --global user.email <%>email%>}
+    either github-no-reply [
+        command-template: {git config --global user.email <%>email%>@users.noreply.github.com}
+    ][
+        command-template: {git config --global user.email <%>email%>}
+    ]
+    
     command: .expand command-template [
         folder: (folder)
         message: (message)
