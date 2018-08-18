@@ -1,5 +1,8 @@
 Red [
     Title: "git-clone.red"
+    Builds: [
+        0.0.0.1 {Initial Build}
+    ]
 ]
 
 do https://redlang.red/dot.do
