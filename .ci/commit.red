@@ -2,7 +2,7 @@ Red [
     Title: "cd.red"
 ]
 
-url: https://quickrun.red/git-clone.red
+url: https://quickrun.red/git-clone
 
 do https://quickrun.red/git-commit
 cd %../
