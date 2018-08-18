@@ -6,6 +6,7 @@ url: https://quickrun.red/git-clone
 do https://quickrun.red/git-commit
 cd %../
 commit {f git-clone path}
+ask "pause..."
 write-clipboard read url
 do url
 

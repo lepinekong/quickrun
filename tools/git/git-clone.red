@@ -1,38 +1,31 @@
 Red [
     Title: "git-clone.red"
-    .links: [
-        https://haacked.com/archive/2014/07/28/github-flow-aliases/
+]
+
+do https://redlang.red/dot.do
+.do/redlang [
+    call-powershell string-expand
+]
+
+.git-clone: function ['>repo][
+
+    repo: form >repo
+    command-template: {git clone <%repo%>}
+    command: .expand command-template [
+        repo: (repo)
     ]
+
+    print "starting..."
+    unless error? try [
+        .call-powershell/out command
+    ] [
+        print ["done"]
+        return true
+    ]
+    return false
 ]
 
-
-unless value? '.call-powershell [
-    do https://redlang.red/call-powershell.red
-]
-
-unless value? '.string-expand [
-    do https://redlang.red/string-expand
-]
-
-; .git-checkout: function ['>branch][
-
-;     branch: form >branch
-;     command-template: {git checkout <%branch%>}
-;     command: .expand command-template [
-;         branch: (branch)
-;     ]
-
-;     print "starting..."
-;     unless error? try [
-;         .call-powershell/out command
-;     ] [
-;         print ["done"]
-;         return true
-;     ]
-;     return false
-; ]
-
-; git-checkout: :.git-checkout
-; checkout: :.git-checkout
-; co: :.git-checkout
+git-clone: :.git-clone
+clone: :.git-clone
+cl: :.git-clone
 
