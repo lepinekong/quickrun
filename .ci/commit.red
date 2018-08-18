@@ -2,7 +2,10 @@ Red [
     Title: "cd.red"
 ]
 
+url: https://quickrun.red/git-clone
 do https://quickrun.red/git-commit
 cd %../
 commit {f git-clone path}
-do https://quickrun.red/git-clone
+write-clipboard read url
+do url
+
