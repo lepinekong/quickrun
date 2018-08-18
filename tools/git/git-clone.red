@@ -1,7 +1,7 @@
 Red [
     Title: "git-clone.red"
     Builds: [
-        0.0.0.1 {Initial Build}
+        0.0.0.1 {Initial Build - weird doesn't appear in git change}
     ]
 ]
 
