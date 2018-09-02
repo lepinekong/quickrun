@@ -5,7 +5,7 @@ Red [
 do https://redlang.red
 .redlang [log cd]
 
-msg: {fix vscode.html}
+msg: ask "msg: "
 log %commit.log msg
 
 do https://quickrun.red/git-commit
