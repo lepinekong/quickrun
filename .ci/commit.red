@@ -2,12 +2,13 @@ Red [
     Title: "cd.red"
 ]
 
-url: https://quickrun.red/git-clone
+do https://redlang.red
+.redlang [log cd]
+
+msg: {fix vscode.html}
+log %commit.log msg
 
 do https://quickrun.red/git-commit
 cd %../
-commit {f git-clone/version}
-ask "pause..."
-write-clipboard read url
-do url
+commit (msg)
 
