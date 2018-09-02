@@ -24,9 +24,9 @@ if not value? '.redlang [
     /browse
     /project
 ][
-    file-or-folder: to-local-file to-red-file form :>file.or.folder
+    file-or-folder: to-local-file clean-path to-red-file form :>file.or.folder
     command: rejoin ["code" { } {"} file-or-folder {"}]
-
+    print command
     call/show command
 ]
 
