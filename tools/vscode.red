@@ -12,6 +12,12 @@ Red [
     ]
 ]
 
+if not value? '.redlang [
+    do https://redlang.red
+]
+
+.redlang [alias]
+
 .VSCode:  function [
     {Open Visual Studio Code with optional file or folder}
     '>file.or.folder [word! string! file! url! block! unset!] 
@@ -24,4 +30,5 @@ Red [
     call/show command
 ]
 
-VSCode: :.VSCode
+alias .vscode [vscode code]
+
