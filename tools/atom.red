@@ -1,8 +1,8 @@
 Red [
-    Title: "vscode.red"
+    Title: "atom.red"
     SemVer: [1.0.0 {alpha}]  
     Builds: [
-        0.0.0.1 {Initial Build}
+        0.0.0.1 {Initial Build from vscode.3.red build 0.0.0.1}
     ]
     Iterations: [
         1 {Initial Iteration
@@ -18,7 +18,7 @@ if not value? '.redlang [
 
 .redlang [alias]
 
-.VSCode:  function [
+.atom:  function [
     {Open Visual Studio Code with optional file or folder}
     '>file.or.folder [word! string! file! url! block! unset!] 
     /browse
@@ -30,5 +30,5 @@ if not value? '.redlang [
     call/show command
 ]
 
-alias .vscode [vscode code]
+alias .atom [atom code]
 
