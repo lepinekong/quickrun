@@ -2,12 +2,7 @@ Red [
     Title: "powershell.red"
 ]
 
-if not value? '.redlang [
-    do https://redlang.red
-]
-.redlang [alias]
-
-.powershell: function [/startup-dir >startup-directory /startup-command >startup-command][
+powershell: function [/startup-dir >startup-directory /startup-command >startup-command][
 
 	unless startup-dir [
 		>startup-directory: to-local-file what-dir
@@ -26,8 +21,6 @@ if not value? '.redlang [
 	call command	
 ]
 
-.alias .powershell [powershell]
-
 lazy-load: function ['>function][
 
 	.function: form >function
@@ -42,7 +35,7 @@ lazy-load: function ['>function][
 
 load-powershell-profile: function [][
 	unless value? 'powershell-profile [
-		do https://quickrun.red/commandline/powershell/profile.red
+		do https://redlang.red/powershell/powershell-profile.red
 		return true
 	]
 	return false
