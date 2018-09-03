@@ -6,26 +6,7 @@ if not value? '.redlang [
 	do https://redlang.red
 ]
 
-; powershell: function [/startup-dir >startup-directory /startup-command >startup-command][
-
-; 	unless startup-dir [
-; 		>startup-directory: to-local-file what-dir
-; 	]
-
-
-; 	command: rejoin [{start powershell -NoExit -Command "Set-Location '} replace/all >startup-directory "\" "\\"]
-; 	either startup-command [
-; 		startup-command: form >startup-command
-; 		replace/all startup-command "\" "\\" 
-; 		command: rejoin [command ";" >startup-command {'}]
-; 	][
-; 		command: rejoin [command {'}]
-; 	]
-; 	print command
-; 	call command	
-; ]
-
-lazy-load: function ['>function][
+.lazy-load: function ['>function][
 
 	.function: form >function
 
@@ -40,6 +21,7 @@ lazy-load: function ['>function][
 		]	
 	]
 ]
+.alias .lazy-load [lazy-load]
 
 load-powershell: function [][
 	unless value? 'powershell [
