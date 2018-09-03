@@ -15,14 +15,14 @@ lazy-load: function ['>function][
 	switch .function [		
 		"powershell" [
 			load-powershell ; will load powershell-profile function if not already loaded
-			;powershell ; will call powershell function
+			powershell ; will call powershell function
 		]	
 	]
 ]
 
 load-powershell: function [][
 	unless value? 'powershell [
-		;do https://quickrun.red/commandline/powershell/index.red
+		do https://quickrun.red/commandline/powershell/temp.red
 		print {loading powershell: TODO}
 		return true
 	]
