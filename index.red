@@ -2,4 +2,6 @@ Red [
     Title: ""
 ]
 
-print "quickrun"
+do https://redlang.red
+.redlang [cd]
+.quickrun [vscode npm git]
