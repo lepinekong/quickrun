@@ -2,14 +2,14 @@ Red [
     Title: "powershell.red"
 ]
 
-system/lexer/pre-load: func [src part][
+; system/lexer/pre-load: func [src part][
 
-]
+; ]
 
-if not value? '.redlang [
-    do https://redlang.red
-]
-.redlang [alias]
+; if not value? '.redlang [
+;     do https://redlang.red
+; ]
+; .redlang [alias]
 
 .powershell: function [/startup-dir >startup-directory /startup-command >startup-command][
 
