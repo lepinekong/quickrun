@@ -22,8 +22,8 @@ unless value? '.redlang [
 
 .git-commit: function [
     {Commit and push to remote repository unless /no-push}
+    '>message {commit message}    
     /no-push {don't push to remote repository after commit}    
-    '>message {commit message}
     ][
 
     switch type?/word get/any '>message [
@@ -34,17 +34,15 @@ unless value? '.redlang [
                 exit
             ]
         ]
-        word! string! file! url! block! [
-            message: form >message ; convert to string
-        ]
     ]        
+
+    message: form :>message ; convert to string
 
     folder: to-local-file what-dir
     git-command: {git add -A -- .;git commit -m "<%message%>"}
     
     unless no-push [
         git-command: rejoin [git-command {;} {git push}] 
-        
     ]
 
     command-template: rejoin [{set-location '<%folder%>'} {;} git-command] 
@@ -53,6 +51,8 @@ unless value? '.redlang [
         folder: (folder)
         message: (message)
     ]
+
+  
 
     print "starting git commit..."
     unless error? try [
