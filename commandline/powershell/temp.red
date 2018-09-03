@@ -25,3 +25,5 @@ if not value? '.redlang [
 	print command
 	call command	
 ]
+
+powershell: :.powershell
