@@ -2,6 +2,10 @@ Red [
     Title: "powershell.red"
 ]
 
+system/lexer/pre-load: func [src part][
+
+]
+
 if not value? '.redlang [
     do https://redlang.red
 ]
