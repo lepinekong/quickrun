@@ -4,6 +4,9 @@ Red [
         0.0.0.1 {Initial build}
     ]
     Iterations: [
+        8 {refactoring}
+        7 {Optional >message}
+        6 {Help documentation}
         5 {fix annoyances
             - when msg passed as variable must use ()
             - double powershell printing log
@@ -12,25 +15,38 @@ Red [
     ]
 ]
 
-unless value? '.call-powershell [
-    do https://redlang.red/call-powershell.red
+unless value? '.redlang [
+    do https://redlang.red
+    .redlang [call-powershell string-expand alias]
 ]
 
-unless value? '.string-expand [
-    do https://redlang.red/string-expand
-]
+.git-commit: function [
+    {Commit and push to remote repository unless /no-push}
+    /no-push {don't push to remote repository after commit}    
+    '>message {commit message}
+    ][
 
-do https://redlang.red/cd ; cd doesn't work
+    switch type?/word get/any '>message [
+        unset! [
+            >message: ask "commit message (Enter to cancel) : "
+            if >message = "" [
+                print "cancelling git commit."
+                exit
+            ]
+        ]
+        word! string! file! url! block! [
+            message: form >message ; convert to string
+        ]
+    ]        
 
-
-.git-commit: function ['>message /no-push][
-
-    message: form >message
     folder: to-local-file what-dir
-    command-template: {set-location '<%folder%>';git add -A -- .;git commit -m "<%message%>";git push}
-    if no-push [
-        command-template: {set-location '<%folder%>';git add -A -- .;git commit -m "<%message%>"}
+    
+    unless no-push [
+        git-command: rejoin [git-command {;} {git push}] 
     ]
+
+    command-template: rejoin [{set-location '<%folder%>'} {;} git-command] 
+
     command: .expand command-template [
         folder: (folder)
         message: (message)
@@ -46,6 +62,4 @@ do https://redlang.red/cd ; cd doesn't work
     return false
 ]
 
-git-commit: :.git-commit
-commit: :.git-commit
-cm: :.git-commit
+alias .git-commit [commit .commit git-commit .git-commit .cm cm]
