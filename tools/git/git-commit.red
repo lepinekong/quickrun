@@ -17,8 +17,8 @@ Red [
 
 unless value? '.redlang [
     do https://redlang.red
-    .redlang [call-powershell string-expand alias]
 ]
+.redlang [call-powershell string-expand alias]
 
 .git-commit: function [
     {Commit and push to remote repository unless /no-push}
@@ -62,4 +62,4 @@ unless value? '.redlang [
     return false
 ]
 
-alias .git-commit [commit .commit git-commit .git-commit .cm cm]
+.alias .git-commit [commit .commit git-commit .git-commit .cm cm]
