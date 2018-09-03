@@ -2,12 +2,12 @@ Red [
     Title: "powershell.red"
 ]
 
-if not value? '.redlang [
-    do https://redlang.red
-]
-.redlang [alias]
+; if not value? '.redlang [
+;     do https://redlang.red
+; ]
+;.redlang [alias]
 
-.powershell: function [/startup-dir >startup-directory /startup-command >startup-command][
+powershell: function [/startup-dir >startup-directory /startup-command >startup-command][
 
 	unless startup-dir [
 		>startup-directory: to-local-file what-dir
@@ -26,7 +26,7 @@ if not value? '.redlang [
 	call command	
 ]
 
-.alias .powershell [powershell]
+;.alias .powershell [powershell]
 
 lazy-load: function ['>function][
 
@@ -59,6 +59,3 @@ system/lexer/pre-load: func [src part][
         ]
     ]
 ]
-
-
-
