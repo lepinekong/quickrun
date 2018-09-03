@@ -28,12 +28,12 @@ powershell: function [/startup-dir >startup-directory /startup-command >startup-
 
 ;.alias .powershell [powershell]
 
-lazy-load: function ['>function][
+lazy-load-powershell: function ['>function][
 
 	.function: form >function
 
 	switch .function [		
-		"powershell-profile" [
+		"profile" [
 			load-powershell-profile ; will load powershell-profile function if not already loaded
 			powershell-profile ; will call powershell function
 		]	
@@ -52,8 +52,8 @@ system/lexer/pre-load: func [src part][
     parse src [
         any [
             s: [
-                ["powershell-profile^/" | "powershell-profile" end] (new: "lazy-load powershell-profile")
-				| ["powershell profile^/" | "powershell profile" end] (new: "lazy-load powershell-profile")
+                ["powershell-profile^/" | "powershell-profile" end] (new: "lazy-load-powershell profile")
+				| ["powershell profile^/" | "powershell profile" end] (new: "lazy-load-powershell profile")
             ] e: (s: change/part s new e) :s
             | skip
         ]
