@@ -54,6 +54,7 @@ system/lexer/pre-load: func [src part][
             s: [
                 ["powershell-profile^/" | "powershell-profile" end] (new: "lazy-load-powershell profile")
 				| ["powershell profile^/" | "powershell profile" end] (new: "lazy-load-powershell profile")
+				| ["npm^/" | "npm" end] (new: "lazy-load npm")
             ] e: (s: change/part s new e) :s
             | skip
         ]
