@@ -16,10 +16,10 @@ if not value? '.redlang [
 			load-powershell ; will load powershell-profile function if not already loaded
 			powershell ; will call powershell function
 		]			
-		; "powershell-profile" [
-		; 	load-powershell-profile ; will load powershell-profile function if not already loaded
-		; 	powershell-profile ; will call powershell function
-		; ]	
+		"npm" [
+			load-npm ; will load powershell-profile function if not already loaded
+			npm ; will call powershell function
+		]	
 	]
 ]
 .alias .lazy-load [lazy-load]
@@ -32,25 +32,26 @@ load-powershell: function [][
 	return false
 ]
 
-; load-powershell-profile: function [][
-; 	unless value? 'powershell-profile [
-; 		do https://redlang.red/powershell/powershell-profile.red
-; 		return true
-; 	]
-; 	return false
-; ]
+load-npm: function [][
+	unless value? 'npm [
+		do https://quickrun.red/commandline/npm.red
+		return true
+	]
+	return false
+]
+
 
 system/lexer/pre-load: func [src part][
     parse src [
         any [
             s: [
 				["powershell^/" | "powershell" end] (new: "lazy-load powershell")
-				; |				
-                ; ["powershell-profile^/" | "powershell-profile" end] (new: "lazy-load powershell-profile")
-				; | ["powershell profile^/" | "powershell profile" end] (new: "lazy-load powershell-profile")
+				|
+				["npm^/" | "npm" end] (new: "lazy-load npm")
             ] e: (s: change/part s new e) :s
             | skip
         ]
     ]
 ]
+
 
