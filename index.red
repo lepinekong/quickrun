@@ -7,4 +7,4 @@ if not value? '.redlang [
 ]
 
 .redlang [cd]
-.quickrun [vscode npm git]
+.quickrun [vscode npm git powershell]
