@@ -5,7 +5,7 @@ Red [
 if not value? '.redlang [
     do https://redlang.red
 ]
-.redlang [cd]
+.redlang [cd alias]
 ;.quickrun [vscode npm git powershell]
 
 lazy-load: function ['>function][
@@ -15,14 +15,15 @@ lazy-load: function ['>function][
 	switch .function [		
 		"powershell" [
 			load-powershell ; will load powershell-profile function if not already loaded
-			powershell ; will call powershell function
+			;powershell ; will call powershell function
 		]	
 	]
 ]
 
 load-powershell: function [][
 	unless value? 'powershell [
-		do https://quickrun.red/commandline/powershell/index.red
+		;do https://quickrun.red/commandline/powershell/index.red
+		print {loading powershell: TODO}
 		return true
 	]
 	return false
