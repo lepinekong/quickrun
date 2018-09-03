@@ -40,10 +40,11 @@ unless value? '.redlang [
     ]        
 
     folder: to-local-file what-dir
+    git-command: {git add -A -- .;git commit -m "<%message%>"}
     
     unless no-push [
-        ;git-command: rejoin [git-command {;} {git push}] 
-        git-command: rejoin [{git push}] 
+        git-command: rejoin [git-command {;} {git push}] 
+        
     ]
 
     command-template: rejoin [{set-location '<%folder%>'} {;} git-command] 
