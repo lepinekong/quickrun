@@ -5,6 +5,7 @@ Red [
 if not value? '.redlang [
 	do https://redlang.red
 ]
+.redlang [alias]
 
 .lazy-load: function ['>function][
 
@@ -38,8 +39,6 @@ load-powershell-profile: function [][
 	]
 	return false
 ]
-
-
 
 system/lexer/pre-load: func [src part][
     parse src [
