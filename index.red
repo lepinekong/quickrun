@@ -5,6 +5,16 @@ Red [
 do https://redlang.red
 .redlang [cd]
 
+index: function [
+	/build
+][
+	if build [
+		>build: 0.0.0.1.15
+		print >build
+		return >build
+	]
+]
+
 ..lazy-load: function ['>function][
 
 	.function: form >function
