@@ -4,6 +4,7 @@ Red [
         0.0.0.1 {Initial build}
     ]
     Iterations: [
+        15 {system/lexer/pre-load: func [src part][]}
         8 {refactoring}
         7 {Optional >message}
         6 {Help documentation}
@@ -15,8 +16,7 @@ Red [
     ]
 ]
 
-system/lexer/pre-load: func [src part][
-]
+system/lexer/pre-load: func [src part][]
 
 unless value? '.redlang [
     do https://redlang.red
