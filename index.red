@@ -33,7 +33,7 @@ load-powershell: function [][
 ]
 
 load-git: function [][
-	unless value? 'npm [
+	unless value? 'git [
 		do https://quickrun.red/tools/git/index.red
 		return true
 	]
