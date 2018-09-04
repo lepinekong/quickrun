@@ -1,5 +1,5 @@
 Red [
-    Title: "powershell.red"
+    Title: "quickrun"
 ]
 
 if not value? '.redlang [
@@ -13,12 +13,12 @@ if not value? '.redlang [
 
 	switch .function [	
 		"powershell" [
-			load-powershell ; will load powershell-profile function if not already loaded
+			load-powershell ; will load powershell function if not already loaded
 			powershell ; will call powershell function
 		]			
 		"git" [
-			load-git ; will load powershell-profile function if not already loaded
-			git ; will call powershell function
+			load-git ; will load git function if not already loaded
+			git ; will call git function
 		]	
 	]
 ]
