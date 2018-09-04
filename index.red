@@ -20,7 +20,7 @@ Red [
 
 ..load-powershell: function [][
 	unless value? 'powershell [
-		do https://quickrun.red/commandline/powershell/index.red
+		do https://quickrun.red/powershell
 		return true
 	]
 	return false
