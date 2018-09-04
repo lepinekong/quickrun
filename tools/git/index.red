@@ -3,6 +3,11 @@ Red [
     Needs: 'View
 ]
 
+system/lexer/pre-load: func [src part][
+]
+
+do https://quickrun.red/git-commit
+
 git: function [][
     print {
         git commands examples:
