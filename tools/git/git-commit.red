@@ -15,6 +15,9 @@ Red [
     ]
 ]
 
+system/lexer/pre-load: func [src part][
+]
+
 unless value? '.redlang [
     do https://redlang.red
 ]
