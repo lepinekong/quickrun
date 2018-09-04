@@ -16,9 +16,9 @@ if not value? '.redlang [
 			load-powershell ; will load powershell-profile function if not already loaded
 			powershell ; will call powershell function
 		]			
-		"npm" [
-			load-npm ; will load powershell-profile function if not already loaded
-			npm ; will call powershell function
+		"git" [
+			load-git ; will load powershell-profile function if not already loaded
+			git ; will call powershell function
 		]	
 	]
 ]
@@ -32,9 +32,9 @@ load-powershell: function [][
 	return false
 ]
 
-load-npm: function [][
+load-git: function [][
 	unless value? 'npm [
-		do https://quickrun.red/commandline/npm.red
+		do https://quickrun.red/tools/git/index.red
 		return true
 	]
 	return false
@@ -47,7 +47,7 @@ system/lexer/pre-load: func [src part][
             s: [
 				["powershell^/" | "powershell" end] (new: "lazy-load powershell")
 				|
-				["npm^/" | "npm" end] (new: "lazy-load npm")
+				["git^/" | "git" end] (new: "lazy-load git")
             ] e: (s: change/part s new e) :s
             | skip
         ]
