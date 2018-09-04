@@ -2,6 +2,9 @@ Red [
     Title: "quickrun"
 ]
 
+do https://redlang.red
+.redlang [cd]
+
 ..lazy-load: function ['>function][
 
 	.function: form >function
