@@ -33,6 +33,7 @@ index: function [
 
 ..load-powershell: function [][
 	unless value? 'powershell [
+		system/lexer/pre-load: func [src part][]
 		do https://quickrun.red/powershell
 		return true
 	]
@@ -41,6 +42,7 @@ index: function [
 
 ..load-git: function [][
 	unless value? 'git [
+		system/lexer/pre-load: func [src part][]
 		do https://quickrun.red/git
 		return true
 	]
