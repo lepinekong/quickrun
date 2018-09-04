@@ -1,19 +1,14 @@
 Red [
-    Title: ""
+    Title: "git index"
     Needs: 'View
 ]
-
-deactivate-lexer: does [
-    system/lexer/pre-load: func [src part][]
-]
-
 
 activate-lexer: does [
     system/lexer/pre-load: func [src part][
         parse src [
             any [
                 s: [
-                    ["powershell^/" | "powershell" end] (new: "lazy-load powershell")
+                    ["powershell^/" | "powershell" end] (new: "..lazy-load powershell")
                 ] e: (s: change/part s new e) :s
                 | skip
             ]
