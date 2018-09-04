@@ -9,7 +9,7 @@ index: function [
 	/build
 ][
 	if build [
-		>build: 0.0.0.1.15
+		>build: 0.0.0.1.16
 		print >build
 		return >build
 	]
@@ -62,5 +62,10 @@ system/lexer/pre-load: func [src part][
         ]
     ]
 ]
+
+deactivate-lexer: does [
+    system/lexer/pre-load: func [src part][]
+]
+
 
 
