@@ -13,6 +13,11 @@ Red [
         ]
         string! url![                  
             urls: form .urls
+            if suffix? urls [
+                unless (copy/part urls 4) = "http" [
+                    urls: rejoin ["https://" urls]
+                ]
+            ]
             call rejoin [{start chrome} { } urls] 
         ]
         path! [
