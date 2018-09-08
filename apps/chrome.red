@@ -10,7 +10,7 @@ Red [
 
     if _build [
         >builds: [
-            0.0.0.1.3.1 {case: word! and no extension}
+            0.0.0.1.3.2 {case: word! and no extension}
         ]
         unless silent [
             ?? >builds
