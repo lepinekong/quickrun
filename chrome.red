@@ -5,12 +5,17 @@ Red [
 .chrome: func [
     '.urls [string! word! url! unset! block! path!]
     /_build
+    /silent
 ][   
 
     if _build [
         >builds: [
             0.0.0.1.3 {case: word! and no extension}
         ]
+        unless silent [
+            ?? >builds
+        ]
+        return _build
     ]
 
     switch/default type?/word get/any '.urls [
