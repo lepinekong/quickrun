@@ -2,7 +2,16 @@ Red [
     Title: "chrome"
 ]
 
-.chrome: func ['.urls [string! word! url! unset! block! path!]][   
+.chrome: func [
+    '.urls [string! word! url! unset! block! path!]
+    /_build
+][   
+
+    if _build [
+        >builds: [
+            0.0.0.1.3 {case: word! and no extension}
+        ]
+    ]
 
     switch/default type?/word get/any '.urls [
         unset! [
@@ -11,12 +20,14 @@ Red [
                 Chrome https://github.com
             }
         ]
-        string! url![                  
-            urls: form .urls
-            if suffix? urls [
-                unless (copy/part urls 4) = "http" [
-                    urls: rejoin ["https://" urls]
+        word! string! url![                  
+            url: form .urls
+            either suffix? urls [
+                unless (copy/part url 4) = "http" [
+                    url: rejoin ["https://" url]
                 ]
+            ][
+                url: rejoin ["https://" url ".com"]
             ]
             call rejoin [{start chrome} { } urls] 
         ]
