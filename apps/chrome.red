@@ -27,7 +27,7 @@ Red [
         ]
         word! string! url![                  
             url: form .urls
-            either suffix? urls [
+            either suffix? url [
                 unless (copy/part url 4) = "http" [
                     url: rejoin ["https://" url]
                 ]
