@@ -34,7 +34,7 @@ Red [
             ][
                 url: rejoin ["https://" url ".com"]
             ]
-            call rejoin [{start chrome} { } urls] 
+            call rejoin [{start chrome} { } url] 
         ]
         path! [
             if not value? 'favorites [
