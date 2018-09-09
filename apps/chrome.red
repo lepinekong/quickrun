@@ -74,7 +74,7 @@ unless exists? config-browser-file [
 .load-config-browser: does [
     do load config-browser-file
     foreach [keyword url] favorites/main [
-        create-keyword/url keyword url
+        create-keyword/url/force keyword url
     ]     
 ]
 
