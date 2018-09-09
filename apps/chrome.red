@@ -5,7 +5,8 @@ Red [
 if not value? '.redlang [
     do https://redlang.red
 ]
-.redlang [files get-folder]
+.redlang [files get-folder ]
+do https://quickrun.red/libs/readable-to-favorites
 
 create-keyword: function [
     keyword /url >url
@@ -39,29 +40,48 @@ config-browser-file: rejoin [config-browser-directory config-browser-filename]
 unless exists? config-browser-file [
 
     if not value? 'Favorites [
-        Favorites: [
+        Favorites: readable-to-favorites [
+
+            Title: {My Favorites}
+
             Main: [
-                github: https://github.com/lepinekong?tab=repositories
-                twitter: https://twitter.com
-                gitter: https://gitter.im/red/help
+                .title: {Main}
+                .links: [
+                    github https://github.com/lepinekong?tab=repositories
+                    twitter https://twitter.com
+                    agile https://twitter.com/search?q=agile&src=typd
+                    gitter https://gitter.im/red/help
+                    Dzone https://dzone.com 
+                    Devto https://dev.to/
+                    Medium https://medium.com/                    
+                ]
             ]    
             Daily: [
-                pragmatists: https://blog.pragmatists.com
-                Dzone: https://dzone.com
-                Devto: https://dev.to/
-                Redlang: https://gitter.im/red/help
-                dormoshe: https://dormoshe.io/daily-news
-                futurism: https://futurism.com/
+                .title: {Daily}
+                .links: [
+                    pragmatists https://blog.pragmatists.com
+                    Dzone https://dzone.com
+                    Devto https://dev.to/
+                    Redlang https://gitter.im/red/help
+                    dormoshe https://dormoshe.io/daily-news
+                    futurism https://futurism.com/
+                ]
             ]
             Weekly: [
-                JSWeekly: https://javascriptweekly.com
-                MyBridge: https://medium.mybridge.co/@Mybridge
+                .title: {Weekly}
+                .links: [
+                    JSWeekly https://javascriptweekly.com
+                    MyBridge https://medium.mybridge.co/@Mybridge
+                ]
             ]    
 
             Monthly: [
-                Codemag: http://www.codemag.com/Magazine/AllIssues
-                VSMag: https://visualstudiomagazine.com/Home.aspx
-                MSDN: https://msdn.microsoft.com/en-us/magazine/msdn-magazine-issues.aspx
+                .title: {Monthly}
+                .links: [
+                    Codemag http://www.codemag.com/Magazine/AllIssues
+                    VSMag https://visualstudiomagazine.com/Home.aspx
+                    MSDN https://msdn.microsoft.com/en-us/magazine/msdn-magazine-issues.aspx
+                ]
             ]
         ]
 
@@ -73,6 +93,7 @@ unless exists? config-browser-file [
 
 .load-config-browser: does [
     do load config-browser-file
+    Favorites: readable-to-favorites Favorites
     foreach [keyword url] favorites/main [
         create-keyword/url/force keyword url
     ]     
@@ -81,7 +102,7 @@ unless exists? config-browser-file [
 .load-config-browser
 
 alias .load-config-browser [.reload-config-browser reload-config-browser load-config-browser 
- .refresh-config-browser resfresh-config-browser 
+.refresh-config-browser resfresh-config-browser 
 .reload-favorites reload-favorites
 ]
 
@@ -108,8 +129,6 @@ alias .edit-config-browser [
 ]
 
 alias .delete-config-browser [.delete-browser-config delete-config-browser delete-browser-config ]
-
-
 
 .chrome: func [
     '.urls [string! word! url! unset! block! path!]
