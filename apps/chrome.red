@@ -15,6 +15,7 @@ if not value? '.redlang [
 
     if _build [
         >builds: [
+            0.0.0.1.17 {Fix Error: no keyword for github}
             0.0.0.1.16 {Fix Error: url is not in the specified context}
             0.0.0.1.15 {Fix attempt for Error: duplicate variable specified: /local caused by files lib}
             0.0.0.1.14 {Release Bug fix attempt for keyword with full url.}
@@ -76,7 +77,7 @@ if not value? '.redlang [
             ][
 
                 if error? try [
-                    keyword: to-word url
+                    keyword: create-keyword to-word url ; 0.0.0.1.16 fix bug no keyword
                     url: rejoin ["https://" url ".com"]
                 ][
                     keyword: create-keyword/url (to-keyword url) (url) ; 0.0.0.1.10
