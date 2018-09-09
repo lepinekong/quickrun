@@ -10,7 +10,7 @@ Red [
 
     if _build [
         >builds: [
-            0.0.0.1.9 {Bug fix attempt for keyword with full url}
+            0.0.0.1.9 {Bug fix attempt for keyword with full url.}
             0.0.0.1.7 {Bug keyword for full url}
             0.0.0.1.6 {fix automatic keyword part 2}
             0.0.0.1.5 {automatic keyword part 2}
