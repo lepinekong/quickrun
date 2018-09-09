@@ -2,6 +2,11 @@ Red [
     Title: "chrome"
 ]
 
+if not value? '.redlang [
+    do https://redlang.red
+]
+.redlang [files get-folder]
+
 .chrome: func [
     '.urls [string! word! url! unset! block! path!]
     /_build
@@ -10,6 +15,7 @@ Red [
 
     if _build [
         >builds: [
+            0.0.0.1.14 {Release Bug fix attempt for keyword with full url.}
             0.0.0.1.9 {Bug fix attempt for keyword with full url.}
             0.0.0.1.7 {Bug keyword for full url}
             0.0.0.1.6 {fix automatic keyword part 2}
@@ -23,15 +29,23 @@ Red [
         return _build
     ]
 
-    create-keyword: function [keyword][
+    create-keyword: function [keyword /url >url][
         keyword: to-word keyword
         either not value? keyword [ ; 0.0.0.1.5
-            set keyword does compose/deep/only [ ; 0.0.0.1.4
-                go (keyword)
+            func-body: compose/deep/only [ ; 0.0.0.1.4
+                either url [
+                    go (>url) ; 0.0.0.1.12: fix stupid 0.0.0.1.11 bug : url instead of >url
+                ][
+                    go (keyword)
+                ]
+                
             ]
+            ?? func-body
+            set keyword does func-body
         ][
-            ;print [{You can also just type: } keyword] ; 0.0.0.1.6:  BUG 0.0.0.1.5 should not be there
+            ; keyword already
         ]
+        return keyword
     ]
 
     switch/default type?/word get/any '.urls [
@@ -43,26 +57,31 @@ Red [
                 Chrome github
             }
         ]
-        word! string! url![                  
+        word! string! url![  
+        
             url: form .urls
-            either suffix? url [
-                unless (copy/part url 4) = "http" [
-                    url: rejoin ["https://" url]
-                ]
+
+            to-keyword: function [url][
                 domain: get-folder (url) ; 0.0.0.1.9 fixed 0.0.0.1.8 BUG missing ()
                 domain: pick (split domain "/") 4
-                keyword: to-word form first split domain "."
-                create-keyword keyword
-            ][
-                keyword: to-word url
-                url: rejoin ["https://" url ".com"]
-                either not value? keyword [ ; 0.0.0.1.5
-                    set keyword does compose/deep/only [ ; 0.0.0.1.4
-                        go (keyword)
-                    ]
-                ][
-                    ;print [{You can also just type: } keyword] ; 0.0.0.1.6:  BUG 0.0.0.1.5 should not be there
+                keyword: to-word form first split domain "."                 
+            ]
+
+            either suffix? url [ ; github.com
+                unless (copy/part url 4) = "http" [
+                    url: rejoin ["https://" url] ; https://github.com
                 ]
+
+                keyword: create-keyword (to-keyword url) ; create-keyword 'github
+            ][
+
+                if error? try [
+                    keyword: to-word url
+                    url: rejoin ["https://" url ".com"]
+                ][
+                    keyword: create-keyword/url (to-keyword url) (url) ; 0.0.0.1.10
+                ]
+
             ]
             call rejoin [{start chrome} { } url] 
         ]
