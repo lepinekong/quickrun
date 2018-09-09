@@ -41,11 +41,10 @@ unless exists? config-browser-file [
             ]
         ]
 
+        write/lines/append config-browser-file rejoin [
+            {Favorites: } mold Favorites
+        ]
     ]
-
-    write/lines/append config-browser-file rejoin [
-        {Favorites: } mold Favorites
-    ] 
 ]
 
 do load config-browser-file
@@ -60,6 +59,8 @@ alias .edit-config-browser [
     .edit-browser-config 
     edit-browser-config
     edit-favorites
+    favorites
+    bookmarks
 ]
 
 
@@ -102,7 +103,7 @@ foreach [keyword url] favorites/main [
 
     if _build [
         >builds: [
-            0.0.0.3.6 {Browser Config}
+            0.0.0.3.8 {Browser Config}
             0.0.0.3.3 {Create keywords from favorite/main}
             0.0.0.2.13
         ]
