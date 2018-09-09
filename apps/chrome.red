@@ -35,10 +35,14 @@ Red [
                     url: rejoin ["https://" url]
                 ]
             ][
-                keyword: url
+                keyword: to-word url
                 url: rejoin ["https://" url ".com"]
-                set to-word keyword does compose/deep/only [
-                    go (keyword)
+                either not value? keyword [
+                    set keyword does compose/deep/only [ ; 0.0.0.1.5
+                        go (keyword)
+                    ]
+                ][
+                    print [{You can also just type: } keyword]
                 ]
             ]
             call rejoin [{start chrome} { } url] 
