@@ -10,6 +10,7 @@ Red [
 
     if _build [
         >builds: [
+            0.0.0.1.5 {automatic keyword part 2}
             0.0.0.1.4 {automatic keyword}
             0.0.0.1.3.2 {case: word! and no extension}
         ]
@@ -37,12 +38,12 @@ Red [
             ][
                 keyword: to-word url
                 url: rejoin ["https://" url ".com"]
-                either not value? keyword [
-                    set keyword does compose/deep/only [ ; 0.0.0.1.5
+                either not value? keyword [ ; 0.0.0.1.5
+                    set keyword does compose/deep/only [ ; 0.0.0.1.4
                         go (keyword)
                     ]
                 ][
-                    print [{You can also just type: } keyword]
+                    print [{You can also just type: } keyword] ; 0.0.0.1.5
                 ]
             ]
             call rejoin [{start chrome} { } url] 
