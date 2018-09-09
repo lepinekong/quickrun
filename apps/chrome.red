@@ -7,12 +7,12 @@ if not value? '.redlang [
 ]
 .redlang [files get-folder]
 
-config-filename: %quickrun.browser.config.red 
-config-directory: get-folder (system/options/boot)
+config-browser-filename: %quickrun.browser.config.red 
+config-browser-directory: get-folder (system/options/boot)
 
-config-file: rejoin [config-directory config-filename]
+config-browser-file: rejoin [config-browser-directory config-browser-filename]
 
-unless exists? config-file [
+unless exists? config-browser-file [
 
     if not value? 'Favorites [
         Favorites: [
@@ -43,15 +43,15 @@ unless exists? config-file [
 
     ]
 
-    write/lines/append config-file rejoin [
+    write/lines/append config-browser-file rejoin [
         {Favorites: } mold Favorites
     ] 
 ]
 
-do load config-file
+do load config-browser-file
 
 .edit-config-browser: function [][
-    command: rejoin [{notepad.exe } {"} to-local-file config-file {"}]
+    command: rejoin [{notepad.exe } {"} to-local-file config-browser-file {"}]
     call/show command
 ]
 
@@ -65,8 +65,8 @@ alias .edit-config-browser [
 
 .delete-config-browser: function [][
     redlang [confirm]
-    if confirm rejoin ["delete " config-file][
-        delete config-file
+    if confirm rejoin ["delete " config-browser-file][
+        delete config-browser-file
     ]
 ]
 
