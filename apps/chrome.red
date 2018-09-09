@@ -35,6 +35,28 @@ if not value? 'Favorites [
     ]
 ]
 
+
+create-keyword: function [keyword /url >url][
+    keyword: to-word keyword
+    either not value? keyword [ ; 0.0.0.1.5
+        if not  url [
+            >url: keyword ; 0.0.0.16
+        ]
+
+        func-body: compose/deep/only [ ; 0.0.0.1.4
+                go (>url) ; 0.0.0.16 
+        ]
+        set keyword does func-body
+    ][
+        ; keyword already
+    ]
+    return keyword
+]
+
+foreach [keyword url] favorites/main [
+    create-keyword/url keyword url
+] 
+
 .chrome: func [
     '.urls [string! word! url! unset! block! path!]
     /_build
@@ -43,28 +65,13 @@ if not value? 'Favorites [
 
     if _build [
         >builds: [
+            0.0.0.3.3 {Create keywords from favorite/main}
+            0.0.0.2.13
         ]
         unless silent [
             ?? >builds
         ]
         return _build
-    ]
-
-    create-keyword: function [keyword /url >url][
-        keyword: to-word keyword
-        either not value? keyword [ ; 0.0.0.1.5
-            if not  url [
-                >url: keyword ; 0.0.0.16
-            ]
-
-            func-body: compose/deep/only [ ; 0.0.0.1.4
-                    go (>url) ; 0.0.0.16 
-            ]
-            set keyword does func-body
-        ][
-            ; keyword already
-        ]
-        return keyword
     ]
 
     switch/default type?/word get/any '.urls [
@@ -117,9 +124,6 @@ if not value? 'Favorites [
             call rejoin [{start chrome} { } url]
         ]
         path! [
-            ; if not value? 'favorites [
-            ;     do %favorites.red
-            ; ]
             .urls: (.urls)
             block: reduce (.urls)
             go (block)
