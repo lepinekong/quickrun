@@ -7,9 +7,15 @@ if not value? '.redlang [
 ]
 .redlang [files get-folder]
 
-create-keyword: function [keyword /url >url][
+create-keyword: function [
+    keyword /url >url
+    /force 
+][
     keyword: to-word keyword
-    either not value? keyword [ ; 0.0.0.1.5
+
+    not-value-keyword: not value? keyword
+
+    either not-value-keyword or force [ ; 0.0.0.1.5
         if not  url [
             >url: keyword ; 0.0.0.16
         ]
@@ -113,6 +119,7 @@ alias .delete-config-browser [.delete-browser-config delete-config-browser delet
 
     if _build [
         >builds: [
+            0.0.0.3.10 {Refresh favorites for keywords}
             0.0.0.3.9 {Browser Config}
             0.0.0.3.3 {Create keywords from favorite/main}
             0.0.0.2.13
