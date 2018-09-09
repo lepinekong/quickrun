@@ -14,8 +14,6 @@ config-file: rejoin [config-directory config-filename]
 
 unless exists? config-file [
 
-    redlang [request-dir]
-
     if not value? 'Favorites [
         Favorites: [
             Main: [
@@ -42,10 +40,11 @@ unless exists? config-file [
                 MSDN: https://msdn.microsoft.com/en-us/magazine/msdn-magazine-issues.aspx
             ]
         ]
+
     ]
 
     write/lines/append config-file rejoin [
-        {Favorites: } Favorites
+        {Favorites: } mold Favorites
     ] 
 ]
 
@@ -56,7 +55,12 @@ do load config-file
     call/show command
 ]
 
-alias .edit-config-browser [edit-config-browser .edit-browser-config edit-browser-config]
+alias .edit-config-browser [
+    edit-config-browser 
+    .edit-browser-config 
+    edit-browser-config
+    edit-favorites
+]
 
 
 .delete-config-browser: function [][
@@ -98,6 +102,7 @@ foreach [keyword url] favorites/main [
 
     if _build [
         >builds: [
+            0.0.0.3.6 {Browser Config}
             0.0.0.3.3 {Create keywords from favorite/main}
             0.0.0.2.13
         ]
