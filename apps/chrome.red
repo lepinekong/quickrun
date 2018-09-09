@@ -7,6 +7,7 @@ if not value? '.redlang [
 ]
 .redlang [files get-folder ]
 do https://quickrun.red/libs/readable-to-favorites
+do https://quickrun.red/res/default-favorites
 
 create-keyword: function [
     keyword /url >url
@@ -40,58 +41,17 @@ config-browser-file: rejoin [config-browser-directory config-browser-filename]
 unless exists? config-browser-file [
 
     if not value? 'Favorites [
-        Favorites: readable-to-favorites [
-
-            Title: {My Favorites}
-
-            Main: [
-                .title: {Main}
-                .links: [
-                    github https://github.com/lepinekong?tab=repositories
-                    twitter https://twitter.com
-                    agile https://twitter.com/search?q=agile&src=typd
-                    gitter https://gitter.im/red/help
-                    Dzone https://dzone.com 
-                    Devto https://dev.to/
-                    Medium https://medium.com/                    
-                ]
-            ]    
-            Daily: [
-                .title: {Daily}
-                .links: [
-                    pragmatists https://blog.pragmatists.com
-                    Dzone https://dzone.com
-                    Devto https://dev.to/
-                    Redlang https://gitter.im/red/help
-                    dormoshe https://dormoshe.io/daily-news
-                    futurism https://futurism.com/
-                ]
-            ]
-            Weekly: [
-                .title: {Weekly}
-                .links: [
-                    JSWeekly https://javascriptweekly.com
-                    MyBridge https://medium.mybridge.co/@Mybridge
-                ]
-            ]    
-
-            Monthly: [
-                .title: {Monthly}
-                .links: [
-                    Codemag http://www.codemag.com/Magazine/AllIssues
-                    VSMag https://visualstudiomagazine.com/Home.aspx
-                    MSDN https://msdn.microsoft.com/en-us/magazine/msdn-magazine-issues.aspx
-                ]
-            ]
-        ]
-
-        write/lines/append config-browser-file rejoin [
-            {Favorites: } mold Favorites
-        ]
+        Favorites: readable-to-favorites >default-favorites
     ]
 ]
 
 .load-config-browser: does [
+
+    if not exists? config-browser-file[
+        write/lines/append config-browser-file rejoin [
+            {Favorites: } mold >default-favorites
+        ]        
+    ]
     do load config-browser-file
     Favorites: readable-to-favorites Favorites
     foreach [keyword url] favorites/main [
@@ -115,9 +75,10 @@ alias .edit-config-browser [
     edit-config-browser 
     .edit-browser-config 
     edit-browser-config
+    .edit-favorites
     edit-favorites
-    favorites
-    bookmarks
+    edit-bookmarks
+    .edit-bookmarks
 ]
 
 
@@ -138,6 +99,8 @@ alias .delete-config-browser [.delete-browser-config delete-config-browser delet
 
     if _build [
         >builds: [
+            0.0.0.4.6 {Default-Favorites online}
+            0.0.0.4.4 {Readable Human Format}
             0.0.0.3.10 {Refresh favorites for keywords}
             0.0.0.3.9 {Browser Config}
             0.0.0.3.3 {Create keywords from favorite/main}
@@ -218,7 +181,6 @@ alias .delete-config-browser [.delete-browser-config delete-config-browser delet
     ][
         throw-error 'script 'expect-arg .urls
     ]
-
 ]
 
 chrome: :.chrome
