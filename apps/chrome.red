@@ -15,6 +15,7 @@ if not value? '.redlang [
 
     if _build [
         >builds: [
+            0.0.0.1.16 {Fix Error: url is not in the specified context}
             0.0.0.1.15 {Fix attempt for Error: duplicate variable specified: /local caused by files lib}
             0.0.0.1.14 {Release Bug fix attempt for keyword with full url.}
             0.0.0.1.9 {Bug fix attempt for keyword with full url.}
@@ -33,15 +34,13 @@ if not value? '.redlang [
     create-keyword: function [keyword /url >url][
         keyword: to-word keyword
         either not value? keyword [ ; 0.0.0.1.5
-            func-body: compose/deep/only [ ; 0.0.0.1.4
-                either url [
-                    go (>url) ; 0.0.0.1.12: fix stupid 0.0.0.1.11 bug : url instead of >url
-                ][
-                    go (keyword)
-                ]
-                
+            if not  url [
+                >url: keyword ; 0.0.0.16
             ]
-            ?? func-body
+
+            func-body: compose/deep/only [ ; 0.0.0.1.4
+                    go (>url) ; 0.0.0.16 
+            ]
             set keyword does func-body
         ][
             ; keyword already
