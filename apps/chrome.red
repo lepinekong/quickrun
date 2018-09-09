@@ -7,6 +7,34 @@ if not value? '.redlang [
 ]
 .redlang [files get-folder]
 
+if not value? 'Favorites [
+    Favorites: [
+        Main: [
+            github: https://github.com/lepinekong?tab=repositories
+            twitter: https://twitter.com
+            gitter: https://gitter.im/red/help
+        ]    
+        Daily: [
+            pragmatists: https://blog.pragmatists.com
+            Dzone: https://dzone.com
+            Devto: https://dev.to/
+            Redlang: https://gitter.im/red/help
+            dormoshe: https://dormoshe.io/daily-news
+            futurism: https://futurism.com/
+        ]
+        Weekly: [
+            JSWeekly: https://javascriptweekly.com
+            MyBridge: https://medium.mybridge.co/@Mybridge
+        ]    
+
+        Monthly: [
+            Codemag: http://www.codemag.com/Magazine/AllIssues
+            VSMag: https://visualstudiomagazine.com/Home.aspx
+            MSDN: https://msdn.microsoft.com/en-us/magazine/msdn-magazine-issues.aspx
+        ]
+    ]
+]
+
 .chrome: func [
     '.urls [string! word! url! unset! block! path!]
     /_build
@@ -15,16 +43,6 @@ if not value? '.redlang [
 
     if _build [
         >builds: [
-            0.0.0.1.17 {Fix Error: no keyword for github}
-            0.0.0.1.16 {Fix Error: url is not in the specified context}
-            0.0.0.1.15 {Fix attempt for Error: duplicate variable specified: /local caused by files lib}
-            0.0.0.1.14 {Release Bug fix attempt for keyword with full url.}
-            0.0.0.1.9 {Bug fix attempt for keyword with full url.}
-            0.0.0.1.7 {Bug keyword for full url}
-            0.0.0.1.6 {fix automatic keyword part 2}
-            0.0.0.1.5 {automatic keyword part 2}
-            0.0.0.1.4 {automatic keyword}
-            0.0.0.1.3.2 {case: word! and no extension}
         ]
         unless silent [
             ?? >builds
@@ -53,27 +71,40 @@ if not value? '.redlang [
         unset! [
             print {
                 Examples:
-                Chrome https://github.com
-                Chrome github.com
-                Chrome github
+                Go https://github.com
+                Go github.com
+                Go github
+                Go https://github.com/lepinekong?tab=repositories
+                Go favorites/Daily
             }
         ]
-        word! string! url![  
-        
+        word! string! url![
+
             url: form .urls
 
-            to-keyword: function [url][
-                domain: get-folder (url) ; 0.0.0.1.9 fixed 0.0.0.1.8 BUG missing ()
-                domain: pick (split domain "/") 4
-                keyword: to-word form first split domain "."                 
-            ]
+                to-keyword: function [url][
+
+                    rule: [
+                        "https://" copy keyword to "."
+                        |
+                        "http://" copy keyword to "."
+                        |
+                        copy keyword to "."
+                        |
+                        copy keyword to end  
+                    ]
+                    parse url rule
+                    return keyword
+                ]
 
             either suffix? url [ ; github.com
+
                 unless (copy/part url 4) = "http" [
                     url: rejoin ["https://" url] ; https://github.com
                 ]
+                keyword: (to-keyword url)
+                keyword: create-keyword keyword ; create-keyword 'github
 
-                keyword: create-keyword (to-keyword url) ; create-keyword 'github
             ][
 
                 if error? try [
@@ -82,24 +113,28 @@ if not value? '.redlang [
                 ][
                     keyword: create-keyword/url (to-keyword url) (url) ; 0.0.0.1.10
                 ]
-
             ]
-            call rejoin [{start chrome} { } url] 
+            call rejoin [{start chrome} { } url]
         ]
         path! [
-            if not value? 'favorites [
-                .do %.system.apps.internet.favorites.red
-            ]
-            block: reduce .urls
+            ; if not value? 'favorites [
+            ;     do %favorites.red
+            ; ]
+            .urls: (.urls)
+            block: reduce (.urls)
             go (block)
         ]
         block! [
+            
             block: :.urls
-            foreach [title url] block [
-                url: form url
-                url: to-url
-                go (url)
+
+            forall block [
+                if url? block/1 [
+                    go (block/1)
+                ]
+                
             ]
+            
         ]    
     ][
         throw-error 'script 'expect-arg .urls
