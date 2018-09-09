@@ -21,6 +21,17 @@ Red [
         return _build
     ]
 
+    create-keyword: function [keyword][
+        keyword: to-word keyword
+        either not value? keyword [ ; 0.0.0.1.5
+            set keyword does compose/deep/only [ ; 0.0.0.1.4
+                go (keyword)
+            ]
+        ][
+            ;print [{You can also just type: } keyword] ; 0.0.0.1.6:  BUG 0.0.0.1.5 should not be there
+        ]
+    ]
+
     switch/default type?/word get/any '.urls [
         unset! [
             print {
@@ -36,6 +47,10 @@ Red [
                 unless (copy/part url 4) = "http" [
                     url: rejoin ["https://" url]
                 ]
+                domain: get-folder url
+                domain: pick (split domain "/") 4
+                keyword: first split domain "."
+                create-keyword keyword
             ][
                 keyword: to-word url
                 url: rejoin ["https://" url ".com"]
