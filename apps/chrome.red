@@ -2,10 +2,10 @@ Red [
     Title: "chrome"
 ]
 
-; if not value? '.redlang [
-;     do https://redlang.red
-; ]
-; .redlang [files get-folder]
+if not value? '.redlang [
+    do https://redlang.red
+]
+.redlang [files get-folder]
 
 .chrome: func [
     '.urls [string! word! url! unset! block! path!]
@@ -15,7 +15,7 @@ Red [
 
     if _build [
         >builds: [
-            0.0.0.1.15 {Fix attempt for Error: duplicate variable specified: /local}
+            0.0.0.1.15 {Fix attempt for Error: duplicate variable specified: /local caused by files lib}
             0.0.0.1.14 {Release Bug fix attempt for keyword with full url.}
             0.0.0.1.9 {Bug fix attempt for keyword with full url.}
             0.0.0.1.7 {Bug keyword for full url}
