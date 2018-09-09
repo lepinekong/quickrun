@@ -7,33 +7,66 @@ if not value? '.redlang [
 ]
 .redlang [files get-folder]
 
-if not value? 'Favorites [
-    Favorites: [
-        Main: [
-            github: https://github.com/lepinekong?tab=repositories
-            twitter: https://twitter.com
-            gitter: https://gitter.im/red/help
-        ]    
-        Daily: [
-            pragmatists: https://blog.pragmatists.com
-            Dzone: https://dzone.com
-            Devto: https://dev.to/
-            Redlang: https://gitter.im/red/help
-            dormoshe: https://dormoshe.io/daily-news
-            futurism: https://futurism.com/
-        ]
-        Weekly: [
-            JSWeekly: https://javascriptweekly.com
-            MyBridge: https://medium.mybridge.co/@Mybridge
-        ]    
+config-filename: %quickrun.browser.config.red 
+config-directory: get-folder (system/options/boot)
 
-        Monthly: [
-            Codemag: http://www.codemag.com/Magazine/AllIssues
-            VSMag: https://visualstudiomagazine.com/Home.aspx
-            MSDN: https://msdn.microsoft.com/en-us/magazine/msdn-magazine-issues.aspx
+config-file: rejoin [config-directory config-filename]
+
+unless exists? config-file [
+
+    redlang [request-dir]
+
+    if not value? 'Favorites [
+        Favorites: [
+            Main: [
+                github: https://github.com/lepinekong?tab=repositories
+                twitter: https://twitter.com
+                gitter: https://gitter.im/red/help
+            ]    
+            Daily: [
+                pragmatists: https://blog.pragmatists.com
+                Dzone: https://dzone.com
+                Devto: https://dev.to/
+                Redlang: https://gitter.im/red/help
+                dormoshe: https://dormoshe.io/daily-news
+                futurism: https://futurism.com/
+            ]
+            Weekly: [
+                JSWeekly: https://javascriptweekly.com
+                MyBridge: https://medium.mybridge.co/@Mybridge
+            ]    
+
+            Monthly: [
+                Codemag: http://www.codemag.com/Magazine/AllIssues
+                VSMag: https://visualstudiomagazine.com/Home.aspx
+                MSDN: https://msdn.microsoft.com/en-us/magazine/msdn-magazine-issues.aspx
+            ]
         ]
     ]
+
+    write/lines/append config-file rejoin [
+        {Favorites: } Favorites
+    ] 
 ]
+
+do load config-file
+
+.edit-config-browser: function [][
+    command: rejoin [{notepad.exe } {"} to-local-file config-file {"}]
+    call/show command
+]
+
+alias .edit-config-browser [edit-config-browser .edit-browser-config edit-browser-config]
+
+
+.delete-config-browser: function [][
+    redlang [confirm]
+    if confirm rejoin ["delete " config-file][
+        delete config-file
+    ]
+]
+
+alias .delete-config-browser [.delete-browser-config delete-config-browser delete-browser-config ]
 
 
 create-keyword: function [keyword /url >url][
