@@ -10,6 +10,7 @@ Red [
 
     if _build [
         >builds: [
+            0.0.0.1.6 {fix automatic keyword part 2}
             0.0.0.1.5 {automatic keyword part 2}
             0.0.0.1.4 {automatic keyword}
             0.0.0.1.3.2 {case: word! and no extension}
@@ -43,7 +44,7 @@ Red [
                         go (keyword)
                     ]
                 ][
-                    print [{You can also just type: } keyword] ; 0.0.0.1.5
+                    ;print [{You can also just type: } keyword] ; 0.0.0.1.6:  BUG 0.0.0.1.5 should not be there
                 ]
             ]
             call rejoin [{start chrome} { } url] 
