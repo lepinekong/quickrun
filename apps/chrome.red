@@ -10,6 +10,7 @@ Red [
 
     if _build [
         >builds: [
+            0.0.0.1.7 {Bug keyword for full url}
             0.0.0.1.6 {fix automatic keyword part 2}
             0.0.0.1.5 {automatic keyword part 2}
             0.0.0.1.4 {automatic keyword}
@@ -47,9 +48,9 @@ Red [
                 unless (copy/part url 4) = "http" [
                     url: rejoin ["https://" url]
                 ]
-                domain: get-folder url
+                domain: get-folder (url) ; 0.0.0.1.9 fixed BUG 0.0.0.1.8 missing ()
                 domain: pick (split domain "/") 4
-                keyword: first split domain "."
+                keyword: to-word form first split domain "."
                 create-keyword keyword
             ][
                 keyword: to-word url
