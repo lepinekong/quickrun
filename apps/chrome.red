@@ -49,6 +49,12 @@ unless exists? config-browser-file [
 
 do load config-browser-file
 
+.reload-config: does [
+    do load config-browser-file
+]
+
+alias .reload-config [reload-config load-config .load-config .refresh-config resfresh-config]
+
 .edit-config-browser: function [][
     command: rejoin [{notepad.exe } {"} to-local-file config-browser-file {"}]
     call/show command
