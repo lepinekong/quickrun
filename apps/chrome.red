@@ -10,6 +10,7 @@ Red [
 
     if _build [
         >builds: [
+            0.0.0.1.4 {automatic keyword}
             0.0.0.1.3.2 {case: word! and no extension}
         ]
         unless silent [
@@ -23,6 +24,8 @@ Red [
             print {
                 Examples:
                 Chrome https://github.com
+                Chrome github.com
+                Chrome github
             }
         ]
         word! string! url![                  
@@ -32,7 +35,11 @@ Red [
                     url: rejoin ["https://" url]
                 ]
             ][
+                keyword: url
                 url: rejoin ["https://" url ".com"]
+                set to-word keyword does compose/deep/only [
+                    go (keyword)
+                ]
             ]
             call rejoin [{start chrome} { } url] 
         ]
