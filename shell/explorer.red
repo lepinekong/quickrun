@@ -27,11 +27,16 @@ explorer: function [
     .redlang [files get-folder]
 
     ;--- if no file
-    switch type?/word get/any '>file-or-folder [
+    switch/default type?/word get/any '>file-or-folder [
         unset! [
             >file-or-folder: clean-path %./
         ]
+    ][
+        if (form >file-or-folder) = "." [
+            >file-or-folder: %.
+        ]
     ]
+    ?? >file-or-folder
 
     ;--- get folder and file if any
     file-or-folder:  to-red-file form :>file-or-folder
@@ -44,12 +49,16 @@ explorer: function [
 
     ;--- call explorer
     
-
-    either dir? .filename  [
-        command: rejoin [{explorer.exe} { } {"} .local-folder {"}]
+    either .filename [ ; 0.0.0.1.1.13
+        either dir? .filename  [
+            command: rejoin [{explorer.exe} { } {"} .local-folder {"}]
+        ][
+            command: rejoin [{explorer.exe} { } {/select,} { } {"} to-local-file clean-path file-or-folder {"}]
+        ]
     ][
-        command: rejoin [{explorer.exe} { } {/select,} { } {"} to-local-file clean-path file-or-folder {"}]
+        command: rejoin [{explorer.exe} { } {"} .local-folder {"}]
     ]
+
     
 
     unless silent [
@@ -59,5 +68,3 @@ explorer: function [
 
     ;start explorer.exe -ArgumentList "/select, `"$demofolder\$demo.red`""
 ]
-
-
