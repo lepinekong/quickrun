@@ -10,6 +10,7 @@ explorer: function [
     '>file-or-folder [any-type! unset!]
     /_build
     /silent
+    /_debug
 ][
 
     >builds: [
@@ -61,7 +62,7 @@ explorer: function [
 
     
 
-    unless silent [
+    if _debug [
         ?? command
     ]
     call/show command
