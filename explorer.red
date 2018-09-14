@@ -16,6 +16,13 @@ explorer: function [
         0.0.0.1.9 {initial release}
     ]
 
+    if _build [
+        unless silent [
+            ?? >builds
+        ]
+        return >builds
+    ]
+
     ;--- requires
     .redlang [files get-folder]
 
