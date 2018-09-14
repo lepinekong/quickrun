@@ -8,8 +8,13 @@ if not value? '.redlang [
 
 explorer: function [
     '>file-or-folder [any-type! unset!]
+    /_build
     /silent
 ][
+
+    >builds: [
+        0.0.0.1.9 {initial release}
+    ]
 
     ;--- requires
     .redlang [files get-folder]
