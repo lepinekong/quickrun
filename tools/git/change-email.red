@@ -25,9 +25,9 @@ Red [
 
     folder: to-local-file what-dir
     either github-no-reply [
-        command-template: {git config --global user.email <%>email%>@users.noreply.github.com}
+        command-template: {git config --global user.email <%email%>@users.noreply.github.com}
     ][
-        command-template: {git config --global user.email <%>email%>}
+        command-template: {git config --global user.email <%email%>}
     ]
     
     command: .expand command-template [
