@@ -20,7 +20,7 @@ Red [
 	]
 
 	either as-admin [
-		command: rejoin [{start powershell -Command "Start-Process PowerShell -Verb RunAs"}]
+		command: rejoin [{start powershell -NoProfile -Command "Start-Process PowerShell -Verb RunAs"}]
 	][
 		command: rejoin [{start powershell -NoExit -Command "Set-Location '} replace/all >startup-directory "\" "\\"]
 		
