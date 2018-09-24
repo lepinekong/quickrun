@@ -1,5 +1,9 @@
 Red [
     Title: "powershell.red"
+	.links: [
+		https://serverfault.com/questions/464018/run-elevated-powershell-prompt-from-command-line 
+		https://technet.microsoft.com/en-us/library/ff629472.aspx
+	]
 ]
 
 ; if not value? '.redlang [
@@ -10,8 +14,8 @@ Red [
 .powershell: function [
 	/startup-dir >startup-directory 
 	/startup-command >startup-command
-	/as-admin ; https://serverfault.com/questions/464018/run-elevated-powershell-prompt-from-command-line 
-	; powershell -Command "Start-Process PowerShell -Verb RunAs"
+	/as-admin
+	/admin
 ][
 
 
@@ -19,7 +23,7 @@ Red [
 		>startup-directory: to-local-file what-dir
 	]
 
-	either as-admin [
+	either (as-admin or admin) [
 		command: rejoin [{start powershell -NoProfile -Command "Start-Process PowerShell -Verb RunAs"}]
 	][
 		command: rejoin [{start powershell -NoExit -Command "Set-Location '} replace/all >startup-directory "\" "\\"]
