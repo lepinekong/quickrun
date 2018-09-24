@@ -11,7 +11,7 @@ Red [
 	/startup-dir >startup-directory 
 	/startup-command >startup-command
 	/as-admin ; https://serverfault.com/questions/464018/run-elevated-powershell-prompt-from-command-line 
-	; Start-Process PowerShell -Verb RunAs 
+	; powershell -Command "Start-Process PowerShell -Verb RunAs"
 ][
 
 
@@ -20,7 +20,7 @@ Red [
 	]
 
 	either as-admin [
-		command: {Start-Process PowerShell -Verb RunAs}
+		command: rejoin [{start powershell -Command "Start-Process PowerShell -Verb RunAs"}]
 	][
 		command: rejoin [{start powershell -NoExit -Command "Set-Location '} replace/all >startup-directory "\" "\\"]
 		
