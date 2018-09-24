@@ -7,21 +7,32 @@ Red [
 ; ]
 ;.redlang [alias]
 
-powershell: function [/startup-dir >startup-directory /startup-command >startup-command][
+.powershell: function [
+	/startup-dir >startup-directory 
+	/startup-command >startup-command
+	/as-admin ; https://serverfault.com/questions/464018/run-elevated-powershell-prompt-from-command-line 
+	; Start-Process PowerShell -Verb RunAs 
+][
+
 
 	unless startup-dir [
 		>startup-directory: to-local-file what-dir
 	]
 
-
-	command: rejoin [{start powershell -NoExit -Command "Set-Location '} replace/all >startup-directory "\" "\\"]
-	either startup-command [
-		startup-command: form >startup-command
-		replace/all startup-command "\" "\\" 
-		command: rejoin [command ";" >startup-command {'}]
+	either as-admin [
+		command: {Start-Process PowerShell -Verb RunAs}
 	][
-		command: rejoin [command {'}]
+		command: rejoin [{start powershell -NoExit -Command "Set-Location '} replace/all >startup-directory "\" "\\"]
+		
+		either startup-command [
+			startup-command: form >startup-command
+			replace/all startup-command "\" "\\" 
+			command: rejoin [command ";" >startup-command {'}]
+		][
+			command: rejoin [command {'}]
+		]
 	]
+
 	print command
 	call command	
 ]
@@ -60,3 +71,5 @@ system/lexer/pre-load: func [src part][
         ]
     ]
 ]
+
+powershell: :.powershell
