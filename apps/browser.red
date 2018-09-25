@@ -8,7 +8,6 @@ if not value? '.redlang [
 .redlang [files get-folder ]
 do https://quickrun.red/libs/readable-to-favorites
 do https://quickrun.red/res/default-favorites
-
 create-keyword: function [
     keyword /url >url
     /force 
@@ -32,7 +31,6 @@ create-keyword: function [
     return keyword
 ]
 
-
 config-browser-filename: %quickrun.browser.config.red 
 config-browser-directory: get-folder (system/options/boot)
 
@@ -44,7 +42,6 @@ unless exists? config-browser-file [
         Favorites: readable-to-favorites >default-favorites
     ]
 ]
-
 .load-config-browser: does [
 
     if not exists? config-browser-file[
@@ -66,6 +63,15 @@ alias .load-config-browser [.reload-config-browser reload-config-browser load-co
 .reload-favorites reload-favorites
 ]
 
+.delete-config-browser: function [][
+    redlang [confirm]
+    if confirm rejoin ["delete " config-browser-file][
+        delete config-browser-file
+    ]
+]
+
+alias .delete-config-browser [.delete-browser-config delete-config-browser delete-browser-config ]
+
 .edit-config-browser: function [][
     command: rejoin [{notepad.exe } {"} to-local-file config-browser-file {"}]
     call/show command
@@ -80,16 +86,6 @@ alias .edit-config-browser [
     edit-bookmarks
     .edit-bookmarks
 ]
-
-
-.delete-config-browser: function [][
-    redlang [confirm]
-    if confirm rejoin ["delete " config-browser-file][
-        delete config-browser-file
-    ]
-]
-
-alias .delete-config-browser [.delete-browser-config delete-config-browser delete-browser-config ]
 
 .chrome: func [
     '.urls [string! word! url! unset! block! path!]
@@ -187,3 +183,4 @@ chrome: :.chrome
 goto: :.chrome
 go: :.chrome
 browse: :.chrome
+
