@@ -9,6 +9,7 @@ if not value? '.redlang [
 
 .redlang [
     call-powershell
+    confirm
 ]
 
 .git-init: function [
@@ -28,7 +29,13 @@ if not value? '.redlang [
     command: {git init}
 
     unless error? try [
-        .call-powershell/out command
+        either confirm (command) [
+            .call-powershell/out command
+        ][
+            print rejoin [{abort} " " command "."]
+            quit
+        ]
+        
     ][
         print ["done"]
         return true
