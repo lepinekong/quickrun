@@ -7,6 +7,11 @@ Red [
     ]
 ]
 
+if not value? '.redlang [
+    do https://redlang.red
+]
+.redlang [alias call-powershell]
+
 .git-save-password: function [
     /version
     /help
@@ -22,14 +27,22 @@ Red [
         ]
     ]
 
-    command: {git config --global credential.helper wincred}
+    #if config/OS = 'Windows [
+        print "OS=Windows"
+        command: {git config --global credential.helper wincred}
 
-    unless error? try [
-        .call-powershell/out command
-    ] [
-        print ["done"]
-        return true
-        exit
+        unless error? try [
+            .call-powershell/out command
+        ] [
+            return true
+            exit
+        ]
     ]
+
     return false
 ]
+
+alias .git-save-password [git-save-password]
+
+git-save-password
+
