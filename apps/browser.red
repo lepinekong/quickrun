@@ -2,6 +2,8 @@ Red [
     Title: "chrome"
 ]
 
+__BROWSER_CONFIG_FILE_NAME__: %quickrun.browser.config.red 
+__CONFIG_EDITOR__: %notepad.exe ; in 06.edit-config-browser.red
 if not value? '.redlang [
     do https://redlang.red
 ]
@@ -33,17 +35,17 @@ create-keyword: function [
     return keyword
 ]
 
-browser.context: context [
+.browser.context: context [
     config-directory: get-folder (system/options/boot)
-    config-filename: %quickrun.browser.config.red 
+    config-filename: __BROWSER_CONFIG_FILE_NAME__ 
 
     get-config-file: function [][
         return rejoin [config-directory config-filename]
     ]
 ]
 
-config-browser-filename: %quickrun.browser.config.red 
-config-browser-directory: get-folder (system/options/boot)
+config-browser-filename: .browser.context/config-filename
+config-browser-directory: .browser.context/config-directory
 
 config-browser-file: rejoin [config-browser-directory config-browser-filename]
 
@@ -67,15 +69,15 @@ unless exists? config-browser-file [
     ]     
 ]
 
-.load-config-browser
-
 alias .load-config-browser [.reload-config-browser reload-config-browser load-config-browser 
 .refresh-config-browser resfresh-config-browser 
 .reload-favorites reload-favorites
 ]
 
+.load-config-browser
+
 .edit-config-browser: function [][
-    command: rejoin [{notepad.exe } {"} to-local-file config-browser-file {"}]
+    command: rejoin [__CONFIG_EDITOR__ { } {"} to-local-file config-browser-file {"}]
     call/show command
 ]
 
@@ -223,7 +225,7 @@ browse: :.chrome
         do https://readable.red/read-readable
     ]
     block: .read-readable config-browser-file
-    block: select block 'favorites
+    ;block: select block 'favorites
     obj: context block
     categories: words-of obj
 
