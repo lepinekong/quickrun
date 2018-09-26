@@ -8,6 +8,8 @@ if not value? '.redlang [
 .redlang [files get-folder ]
 do https://quickrun.red/libs/readable-to-favorites
 do https://quickrun.red/res/default-favorites
+
+
 create-keyword: function [
     keyword /url >url
     /force 
@@ -31,6 +33,15 @@ create-keyword: function [
     return keyword
 ]
 
+browser.context: context [
+    config-directory: get-folder (system/options/boot)
+    config-filename: %quickrun.browser.config.red 
+
+    get-config-file: function [][
+        return rejoin [config-directory config-filename]
+    ]
+]
+
 config-browser-filename: %quickrun.browser.config.red 
 config-browser-directory: get-folder (system/options/boot)
 
@@ -44,7 +55,7 @@ unless exists? config-browser-file [
 ]
 .load-config-browser: does [
 
-    if not exists? config-browser-file[
+    if not exists? config-browser-file [
         write/lines/append config-browser-file rejoin [
             {Favorites: } mold >default-favorites
         ]        
@@ -63,15 +74,6 @@ alias .load-config-browser [.reload-config-browser reload-config-browser load-co
 .reload-favorites reload-favorites
 ]
 
-.delete-config-browser: function [][
-    redlang [confirm]
-    if confirm rejoin ["delete " config-browser-file][
-        delete config-browser-file
-    ]
-]
-
-alias .delete-config-browser [.delete-browser-config delete-config-browser delete-browser-config ]
-
 .edit-config-browser: function [][
     command: rejoin [{notepad.exe } {"} to-local-file config-browser-file {"}]
     call/show command
@@ -86,6 +88,35 @@ alias .edit-config-browser [
     edit-bookmarks
     .edit-bookmarks
 ]
+
+.save-config-browser: function [][
+
+    if not value? '.redlang [
+        do https://redlang.red
+    ]
+    .redlang [get-system-folder git-commit]
+
+    system-folder: .get-system-folder
+    memo-dir: what-dir
+    .cd (system-folder)
+    .git-commit
+    cd (memo-dir)
+    
+]
+
+alias .save-config-browser [
+    save-config-browser
+    save-browser-config
+    .save-browser-config
+]
+.delete-config-browser: function [][
+    redlang [confirm]
+    if confirm rejoin ["delete " config-browser-file][
+        delete config-browser-file
+    ]
+]
+
+alias .delete-config-browser [.delete-browser-config delete-config-browser delete-browser-config ]
 
 .chrome: func [
     '.urls [string! word! url! unset! block! path!]
