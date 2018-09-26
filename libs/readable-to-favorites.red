@@ -31,7 +31,13 @@ Red [
 
     foreach [label content] Paragraphs [
         append block> label
-        append/only block> select content '.links
+        links: select content '.links
+        either not none? links [
+            append/only block> links
+        ][
+            append/only block> content
+        ]
+        
     ]
     return  block>
 
