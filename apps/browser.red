@@ -60,8 +60,8 @@ unless exists? config-browser-file [
             {Favorites: } mold >default-favorites
         ]        
     ]
-    do load config-browser-file
-    Favorites: readable-to-favorites Favorites
+    Favorites: load config-browser-file ; 0.0.0.3.01: changed data format
+    Favorites: readable-to-favorites Favorites ; 0.0.0.2.04: bug todo: none
     foreach [keyword url] favorites/main [
         create-keyword/url/force keyword url
     ]     
@@ -215,6 +215,8 @@ goto: :.chrome
 go: :.chrome
 browse: :.chrome
 
+
+
 .list-favorites: function [/category >category][
 
     if not value? '.read-readable [
@@ -242,5 +244,4 @@ browse: :.chrome
 ]
 
 list-favorites: :.list-favorites
-
 
