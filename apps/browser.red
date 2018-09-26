@@ -215,3 +215,21 @@ goto: :.chrome
 go: :.chrome
 browse: :.chrome
 
+.list-favorites: function [][
+
+    if not value? '.read-readable [
+        do https://readable.red/read-readable
+    ]
+    block: .read-readable config-browser-file
+    block: select block 'favorites
+    obj: context block
+    categories: words-of obj
+    forall categories [
+        i: index? categories
+        print [i "." categories/1]
+    ]
+]
+
+list-favorites: :.list-favorites
+
+
