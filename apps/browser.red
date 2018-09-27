@@ -51,7 +51,12 @@ create-keyword: function [
     unless exists? system/words/config-browser-file [
 
         if not value? in system/words 'favorites [
-            set in system/words 'Favorites .readable-to-favorites >default-favorites
+            
+            ;set in system/words 'Favorites .readable-to-favorites >default-favorites
+
+            set in system/words 'Favorites context [
+                return .readable-to-favorites >default-favorites
+            ]            
         ]
     ]    
 
