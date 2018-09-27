@@ -42,19 +42,32 @@ create-keyword: function [
     get-config-file: function [][
         return rejoin [config-directory config-filename]
     ]
+
+    ; config-browser-filename: .browser.context/config-filename
+    ; config-browser-directory: .browser.context/config-directory
+
+    set in system/words 'config-browser-file rejoin [config-directory config-filename]
+
+    unless exists? system/words/config-browser-file [
+
+        if not value? in system/words 'favorites [
+            set in system/words 'Favorites .readable-to-favorites >default-favorites
+        ]
+    ]    
+
 ]
 
-config-browser-filename: .browser.context/config-filename
-config-browser-directory: .browser.context/config-directory
+; config-browser-filename: .browser.context/config-filename
+; config-browser-directory: .browser.context/config-directory
 
-config-browser-file: rejoin [config-browser-directory config-browser-filename]
+; config-browser-file: rejoin [config-browser-directory config-browser-filename]
 
-unless exists? config-browser-file [
+; unless exists? config-browser-file [
 
-    if not value? 'Favorites [
-        Favorites: readable-to-favorites >default-favorites
-    ]
-]
+;     if not value? 'Favorites [
+;         Favorites: readable-to-favorites >default-favorites
+;     ]
+; ]
 .load-config-browser: does [
 
     if not exists? config-browser-file [
@@ -97,6 +110,56 @@ alias .edit-config-browser [
     edit-bookmarks
     .edit-bookmarks
 ]
+
+
+.save-config-browser: function [][
+
+    if not value? '.redlang [
+        do https://redlang.red
+    ]
+    .redlang [get-system-folder git-commit]
+
+    system-folder: .get-system-folder
+    memo-dir: what-dir
+    .cd (system-folder)
+    .git-commit
+    cd (memo-dir)
+    
+]
+
+alias .save-config-browser [
+    save-config-browser
+    save-browser-config
+    .save-browser-config
+]
+.list-favorites: function [/section >section][
+
+    if not value? '.read-readable [
+        do https://readable.red/read-readable
+    ]
+    block: .read-readable config-browser-file
+    ; obj: context block
+    ; sections: words-of obj
+
+    sections: .read-readable/list-sections config-browser-file
+
+    either section [
+        if number? >section [
+            print >section: sections/:>section
+        ]
+        print >section
+        section-content: select block to-word form >section
+        print mold section-content        
+    ][
+        forall sections [
+            i: index? sections
+            print [i "." sections/1]
+        ]
+    ]
+
+]
+
+list-favorites: :.list-favorites
 
 .delete-config-browser: function [][
     redlang [confirm]
@@ -206,53 +269,3 @@ browse: :.chrome
 
 
 
-.list-favorites: function [/section >section][
-
-    if not value? '.read-readable [
-        do https://readable.red/read-readable
-    ]
-    block: .read-readable config-browser-file
-    ; obj: context block
-    ; sections: words-of obj
-
-    sections: .read-readable/list-sections config-browser-file
-
-    either section [
-        if number? >section [
-            print >section: sections/:>section
-        ]
-        print >section
-        section-content: select block to-word form >section
-        print mold section-content        
-    ][
-        forall sections [
-            i: index? sections
-            print [i "." sections/1]
-        ]
-    ]
-
-]
-
-list-favorites: :.list-favorites
-
-
-.save-config-browser: function [][
-
-    if not value? '.redlang [
-        do https://redlang.red
-    ]
-    .redlang [get-system-folder git-commit]
-
-    system-folder: .get-system-folder
-    memo-dir: what-dir
-    .cd (system-folder)
-    .git-commit
-    cd (memo-dir)
-    
-]
-
-alias .save-config-browser [
-    save-config-browser
-    save-browser-config
-    .save-browser-config
-]
