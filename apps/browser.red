@@ -76,9 +76,16 @@ alias .load-config-browser [.reload-config-browser reload-config-browser load-co
 
 .load-config-browser
 
-.edit-config-browser: function [][
-    command: rejoin [__CONFIG_EDITOR__ { } {"} to-local-file config-browser-file {"}]
-    call/show command
+.edit-config-browser: function [
+    /section '>section
+][
+    either section [
+        
+    ][
+        command: rejoin [__CONFIG_EDITOR__ { } {"} to-local-file config-browser-file {"}]
+        call/show command
+    ]
+
 ]
 
 alias .edit-config-browser [
@@ -91,26 +98,6 @@ alias .edit-config-browser [
     .edit-bookmarks
 ]
 
-.save-config-browser: function [][
-
-    if not value? '.redlang [
-        do https://redlang.red
-    ]
-    .redlang [get-system-folder git-commit]
-
-    system-folder: .get-system-folder
-    memo-dir: what-dir
-    .cd (system-folder)
-    .git-commit
-    cd (memo-dir)
-    
-]
-
-alias .save-config-browser [
-    save-config-browser
-    save-browser-config
-    .save-browser-config
-]
 .delete-config-browser: function [][
     redlang [confirm]
     if confirm rejoin ["delete " config-browser-file][
@@ -219,27 +206,28 @@ browse: :.chrome
 
 
 
-.list-favorites: function [/category >category][
+.list-favorites: function [/section >section][
 
     if not value? '.read-readable [
         do https://readable.red/read-readable
     ]
     block: .read-readable config-browser-file
-    ;block: select block 'favorites
-    obj: context block
-    categories: words-of obj
+    ; obj: context block
+    ; sections: words-of obj
 
-    either category [
-        if number? >category [
-            print >category: categories/:>category
+    sections: .read-readable/list-sections config-browser-file
+
+    either section [
+        if number? >section [
+            print >section: sections/:>section
         ]
-        print >category
-        category-content: select block to-word form >category
-        print mold category-content        
+        print >section
+        section-content: select block to-word form >section
+        print mold section-content        
     ][
-        forall categories [
-            i: index? categories
-            print [i "." categories/1]
+        forall sections [
+            i: index? sections
+            print [i "." sections/1]
         ]
     ]
 
@@ -247,3 +235,24 @@ browse: :.chrome
 
 list-favorites: :.list-favorites
 
+
+.save-config-browser: function [][
+
+    if not value? '.redlang [
+        do https://redlang.red
+    ]
+    .redlang [get-system-folder git-commit]
+
+    system-folder: .get-system-folder
+    memo-dir: what-dir
+    .cd (system-folder)
+    .git-commit
+    cd (memo-dir)
+    
+]
+
+alias .save-config-browser [
+    save-config-browser
+    save-browser-config
+    .save-browser-config
+]
