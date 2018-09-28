@@ -54,9 +54,14 @@ create-keyword: function [
             
             ;set in system/words 'Favorites .readable-to-favorites >default-favorites
 
-            set in system/words 'Favorites context [
-                return .readable-to-favorites >default-favorites
-            ]            
+            ; set in system/words 'Favorites context [
+
+            ;     .favorites: .readable-to-favorites >default-favorites
+                
+            ;     return .favorites
+            ; ]          
+            set in system/words 'Favorites  .readable-to-favorites >default-favorites
+         
         ]
     ]    
 
@@ -273,4 +278,57 @@ go: :.chrome
 browse: :.chrome
 
 
+
+
+.to-post: function [>url][
+    either not value? '.add-readable [
+        print [{loading add-readable}]
+        do https://readable.red/add-readable
+        do https://readable.red/save-readable
+    ]
+    .add-readable favorites 'to-post reduce [>url]   
+    .save-readable (config-browser-file) (favorites)
+]
+
+to-post: :.to-post
+
+
+
+.bookmarks: function [>url][
+    either not value? '.add-readable [
+        print [{loading add-readable}]
+        do https://readable.red/add-readable
+        do https://readable.red/save-readable
+    ]
+    .add-readable favorites 'bookmarks reduce [>url]   
+    .save-readable (config-browser-file) (favorites)
+]
+
+bookmark: :.bookmarks
+
+
+.to-learn: function [>url][
+    either not value? '.add-readable [
+        print [{loading add-readable}]
+        do https://readable.red/add-readable
+        do https://readable.red/save-readable
+    ]
+    .add-readable favorites 'to-learn reduce [>url]   
+    .save-readable (config-browser-file) (favorites)
+]
+
+to-learn: :.to-learn
+
+
+.documentaires: function [>url][
+    either not value? '.add-readable [
+        print [{loading add-readable}]
+        do https://readable.red/add-readable
+        do https://readable.red/save-readable
+    ]
+    .add-readable favorites 'documentaires reduce [>url]   
+    .save-readable (config-browser-file) (favorites)
+]
+
+documentaires: :.documentaires
 
