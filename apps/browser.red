@@ -281,7 +281,7 @@ browse: :.chrome
 
 
 .to-post: function [>url][
-    either not value? '.add-readable [
+    if not value? '.add-readable [
         print [{loading add-readable}]
         do https://readable.red/add-readable
         do https://readable.red/save-readable
@@ -295,7 +295,7 @@ to-post: :.to-post
 
 
 .bookmarks: function [>url][
-    either not value? '.add-readable [
+    if not value? '.add-readable [
         print [{loading add-readable}]
         do https://readable.red/add-readable
         do https://readable.red/save-readable
@@ -308,7 +308,7 @@ bookmark: :.bookmarks
 
 
 .to-learn: function [>url][
-    either not value? '.add-readable [
+    if not value? '.add-readable [
         print [{loading add-readable}]
         do https://readable.red/add-readable
         do https://readable.red/save-readable
@@ -321,7 +321,7 @@ to-learn: :.to-learn
 
 
 .documentaires: function [>url][
-    either not value? '.add-readable [
+    if not value? '.add-readable [
         print [{loading add-readable}]
         do https://readable.red/add-readable
         do https://readable.red/save-readable
