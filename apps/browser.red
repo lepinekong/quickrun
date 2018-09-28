@@ -321,3 +321,12 @@ to-learn: :.to-learn
 documentaires: :.documentaires
 
 
+.jobs: function [>url][
+    .add-readable favorites 'to-post reduce [>url]   
+    .save-readable (config-browser-file) (favorites)
+]
+
+jobs: :.jobs
+
+
+
