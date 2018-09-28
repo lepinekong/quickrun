@@ -320,7 +320,11 @@ to-post: :.to-post
 
 
 .bookmarks: function [>url][
-    .add-readable favorites 'bookmarks reduce [>url]   
+    either block? >url [
+        .add-readable favorites 'bookmarks reduce [>url] 
+    ][
+        .add-readable favorites 'bookmarks (>url)  
+    ] 
     .save-readable (config-browser-file) (favorites)
 ]
 
@@ -328,7 +332,12 @@ bookmark: :.bookmarks
 
 
 .to-learn: function [>url][
-    .add-readable favorites 'to-learn reduce [>url]   
+    section: 'to-learn
+    either block? >url [
+        .add-readable favorites (section) reduce [>url] 
+    ][
+        .add-readable favorites (section) (>url)  
+    ] 
     .save-readable (config-browser-file) (favorites)
 ]
 
@@ -336,7 +345,12 @@ to-learn: :.to-learn
 
 
 .documentaires: function [>url][
-    .add-readable favorites 'documentaires reduce [>url]   
+    section: 'documentaires
+    either block? >url [
+        .add-readable favorites (section) reduce [>url] 
+    ][
+        .add-readable favorites (section) (>url)  
+    ]  
     .save-readable (config-browser-file) (favorites)
 ]
 
@@ -357,7 +371,12 @@ jobs: :.jobs
 
 
 .to-do: function [>url][
-    .add-readable favorites 'todo reduce [>url]   
+    section: 'todo
+    either block? >url [
+        .add-readable favorites (section) reduce [>url] 
+    ][
+        .add-readable favorites (section) (>url)  
+    ] 
     .save-readable (config-browser-file) (favorites)
 ]
 
