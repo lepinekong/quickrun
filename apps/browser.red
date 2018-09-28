@@ -322,11 +322,22 @@ documentaires: :.documentaires
 
 
 .jobs: function [>url][
-    .add-readable favorites 'to-post reduce [>url]   
+    .add-readable favorites 'jobs reduce [>url]   
     .save-readable (config-browser-file) (favorites)
 ]
 
 jobs: :.jobs
+
+
+
+.to-do: function [>url][
+    .add-readable favorites 'todo reduce [>url]   
+    .save-readable (config-browser-file) (favorites)
+]
+
+to-do: :.to-do
+todo: :.to-do
+.todo: :.to-do
 
 
 
