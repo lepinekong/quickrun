@@ -279,13 +279,16 @@ browse: :.chrome
 
 
 
+if not value? '.add-readable [
+    do https://readable.red/add-readable
+]
+
+if not value? '.save-readable [
+    do https://readable.red/save-readable
+]
+
 
 .to-post: function [>url][
-    if not value? '.add-readable [
-        print [{loading add-readable}]
-        do https://readable.red/add-readable
-        do https://readable.red/save-readable
-    ]
     .add-readable favorites 'to-post reduce [>url]   
     .save-readable (config-browser-file) (favorites)
 ]
@@ -295,11 +298,6 @@ to-post: :.to-post
 
 
 .bookmarks: function [>url][
-    if not value? '.add-readable [
-        print [{loading add-readable}]
-        do https://readable.red/add-readable
-        do https://readable.red/save-readable
-    ]
     .add-readable favorites 'bookmarks reduce [>url]   
     .save-readable (config-browser-file) (favorites)
 ]
@@ -308,11 +306,6 @@ bookmark: :.bookmarks
 
 
 .to-learn: function [>url][
-    if not value? '.add-readable [
-        print [{loading add-readable}]
-        do https://readable.red/add-readable
-        do https://readable.red/save-readable
-    ]
     .add-readable favorites 'to-learn reduce [>url]   
     .save-readable (config-browser-file) (favorites)
 ]
@@ -321,14 +314,10 @@ to-learn: :.to-learn
 
 
 .documentaires: function [>url][
-    if not value? '.add-readable [
-        print [{loading add-readable}]
-        do https://readable.red/add-readable
-        do https://readable.red/save-readable
-    ]
     .add-readable favorites 'documentaires reduce [>url]   
     .save-readable (config-browser-file) (favorites)
 ]
 
 documentaires: :.documentaires
+
 
