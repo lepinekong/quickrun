@@ -324,9 +324,16 @@ to-post: :.to-post
 
 
 
-.bookmarks: function [>url][
+.bookmarks: function [
+    >url
+    /documentaires
+][
 
     reload-favorites
+
+    if documentaires [
+        >url: append/only [documentaires: ] >url
+    ]
     
     ..add-bookmark: does [
         .add-readable favorites 'bookmarks reduce [>url]
@@ -346,7 +353,6 @@ to-post: :.to-post
                 sub-category: content/1
                 either set-word? sub-category [
                     
-                    ;existing-sub-category: select (favorite-bookmarks) (sub-category) ; bug: favorites-bookmarks instead of favorite-bookmarks
                     existing-sub-category: select (existing-category) (sub-category) ; 0.0.0.5.02.5
                   
                     
@@ -355,10 +361,7 @@ to-post: :.to-post
                         print [sub-category "already exists, adding its content:"] 
                         print mold existing-sub-category
                         key-string: rejoin ["favorites/bookmarks" "/" category "/" sub-category]
-                        ;.add-readable favorites key-string (existing-sub-category)
                         sub-category-content: select content (sub-category)
-                        ; ?? sub-category-content
-                        ; ask "360"
                         .add-readable favorites key-string (sub-category-content) ;0.0.0.5.01.7 
  
                     ][
@@ -388,6 +391,7 @@ to-post: :.to-post
     ] 
     .save-readable (config-browser-file) (favorites)
 ]
+
 
 bookmarks: :.bookmarks
 bookmark: :.bookmarks
