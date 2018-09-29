@@ -325,6 +325,8 @@ to-post: :.to-post
 
 .bookmarks: function [>url][
 
+    reload-favorites
+    
     ..add-bookmark: does [
         .add-readable favorites 'bookmarks reduce [>url]
     ]
@@ -334,25 +336,31 @@ to-post: :.to-post
         category: >url/1
         either set-word? category [
 
-            existing-category: select favorites/bookmarks (category)
+            favorite-bookmarks: favorites/bookmarks
+            existing-category: select (favorite-bookmarks) (category)
             either existing-category [
                 print [category "already exists: adding its content:"] 
                 content: select >url (category)
 
                 sub-category: content/1
                 either set-word? sub-category [
-                    existing-sub-category: select content (sub-category)
+                    
+                    existing-sub-category: select (favorite-bookmarks) (sub-category) ; bug: favorites-bookmarks instead of favorite-bookmarks
                     either existing-sub-category [
                         print [sub-category "already exists, adding its content:"] 
                         print mold existing-sub-category
                         key-string: rejoin ["favorites/bookmarks" "/" category "/" sub-category]
                         .add-readable favorites key-string (existing-sub-category)
                     ][
-
+                        print [sub-category "doesn't exist"] 
+                        sub-category-content: select content (sub-category)
+                        print mold sub-category-content
+                        key-string: rejoin ["favorites/bookmarks" "/" category "/" sub-category]
+                        .add-readable (favorite-bookmarks) (to-word category) reduce [content] ; 0.0.0.4.08.9: OK
                     ]
                 ][
                     print mold content
-                    .add-readable favorites/bookmarks (to-word category) reduce [content]
+                    .add-readable (favorite-bookmarks) (to-word category) reduce [content]
                 ]
 
             ][
