@@ -345,18 +345,30 @@ to-post: :.to-post
                 sub-category: content/1
                 either set-word? sub-category [
                     
-                    existing-sub-category: select (favorite-bookmarks) (sub-category) ; bug: favorites-bookmarks instead of favorite-bookmarks
+                    ;existing-sub-category: select (favorite-bookmarks) (sub-category) ; bug: favorites-bookmarks instead of favorite-bookmarks
+                    existing-sub-category: select (existing-category) (sub-category) ; 0.0.0.5.02.5
+                  
+                    
                     either existing-sub-category [
+
                         print [sub-category "already exists, adding its content:"] 
                         print mold existing-sub-category
                         key-string: rejoin ["favorites/bookmarks" "/" category "/" sub-category]
-                        .add-readable favorites key-string (existing-sub-category)
+                        ;.add-readable favorites key-string (existing-sub-category)
+                        sub-category-content: select content (sub-category)
+                        ?? sub-category-content
+                        ask "360"
+                        .add-readable favorites key-string (sub-category-content) ;0.0.0.5.01.7 
+ 
                     ][
+ 
                         print [sub-category "doesn't exist"] 
                         sub-category-content: select content (sub-category)
                         print mold sub-category-content
                         key-string: rejoin ["favorites/bookmarks" "/" category "/" sub-category]
+
                         .add-readable (favorite-bookmarks) (to-word category) reduce [content] ; 0.0.0.4.08.9: OK
+ 
                     ]
                 ][
                     print mold content
