@@ -1,5 +1,9 @@
 Red [
-    Title: "chrome"
+    Title: "browser"
+    Description: {}
+    Builds: [
+        0.0.0.4.5 {Bookmarking: todo, to-learn, bookmark,... keywords}
+    ]
 ]
 
 __BROWSER_CONFIG_FILE_NAME__: %quickrun.browser.config.red 
@@ -317,6 +321,8 @@ if not value? '.save-readable [
 
 to-post: :.to-post
 
+
+
 .bookmarks: function [>url][
 
     ..add-bookmark: does [
@@ -326,14 +332,28 @@ to-post: :.to-post
     either block? >url [
 
         category: >url/1
-        ?? category
         either set-word? category [
 
             existing-category: select favorites/bookmarks (category)
             either existing-category [
-                print [DOING: "when category already exists"] 
+                print [category "already exists: adding its content:"] 
                 content: select >url (category)
-                .add-readable favorites/bookmarks (category) reduce [content] 
+
+                sub-category: content/1
+                either set-word? sub-category [
+                    existing-sub-category: select content (sub-category)
+                    either existing-sub-category [
+                        print [sub-category "already exists, adding its content:"] 
+                        print mold existing-sub-category
+                        key-string: rejoin ["favorites/bookmarks" "/" category "/" sub-category]
+                        .add-readable favorites key-string (existing-sub-category)
+                    ][
+
+                    ]
+                ][
+                    print mold content
+                    .add-readable favorites/bookmarks (to-word category) reduce [content]
+                ]
 
             ][
                 ..add-bookmark
@@ -348,6 +368,7 @@ to-post: :.to-post
     .save-readable (config-browser-file) (favorites)
 ]
 
+bookmarks: :.bookmarks
 bookmark: :.bookmarks
 
 
