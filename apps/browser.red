@@ -317,11 +317,31 @@ if not value? '.save-readable [
 
 to-post: :.to-post
 
-
-
 .bookmarks: function [>url][
+
+    ..add-bookmark: does [
+        .add-readable favorites 'bookmarks reduce [>url]
+    ]
+
     either block? >url [
-        .add-readable favorites 'bookmarks reduce [>url] 
+
+        category: >url/1
+        ?? category
+        either set-word? category [
+
+            existing-category: select favorites/bookmarks (category)
+            either existing-category [
+                print [DOING: "when category already exists"] 
+                content: select >url (category)
+                .add-readable favorites/bookmarks (category) reduce [content] 
+
+            ][
+                ..add-bookmark
+            ]
+            
+        ][
+            .add-readable favorites 'bookmarks reduce [>url] 
+        ]
     ][
         .add-readable favorites 'bookmarks (>url)  
     ] 
