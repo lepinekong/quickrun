@@ -2,7 +2,7 @@ Red [
     Title: "browser"
     Description: {}
     Builds: [
-        0.0.0.4.5 {Bookmarking: todo, to-learn, bookmark,... keywords}
+        0.0.0.5.02.7 {Bookmarking: todo, to-learn, bookmark,... keywords}
     ]
 ]
 
