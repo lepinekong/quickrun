@@ -356,8 +356,8 @@ to-post: :.to-post
                         key-string: rejoin ["favorites/bookmarks" "/" category "/" sub-category]
                         ;.add-readable favorites key-string (existing-sub-category)
                         sub-category-content: select content (sub-category)
-                        ?? sub-category-content
-                        ask "360"
+                        ; ?? sub-category-content
+                        ; ask "360"
                         .add-readable favorites key-string (sub-category-content) ;0.0.0.5.01.7 
  
                     ][
