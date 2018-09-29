@@ -1,9 +1,10 @@
 Red [
     Title: "browser"
-    Description: {}
+    Description: {Browser with favorites}
     Builds: [
         0.0.0.5.02.7 {Bookmarking: todo, to-learn, bookmark,... keywords}
     ]
+    GUID: #214b31c1-a2f0-4630-bc52-0727927bba50
 ]
 
 __BROWSER_CONFIG_FILE_NAME__: %quickrun.browser.config.red 
@@ -327,13 +328,19 @@ to-post: :.to-post
 .bookmarks: function [
     >url
     /documentaires
+    /documentaries
 ][
 
     reload-favorites
+    .url-0: >url
 
     if documentaires [
-        >url: append/only [documentaires: ] >url
+        >url: append/only [documentaires: ] .url-0
     ]
+
+    if documentaries [
+        >url: append/only [documentaries: ] .url-0
+    ]    
     
     ..add-bookmark: does [
         .add-readable favorites 'bookmarks reduce [>url]
