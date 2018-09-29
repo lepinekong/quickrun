@@ -7,7 +7,8 @@ Red [
 ]
 
 __BROWSER_CONFIG_FILE_NAME__: %quickrun.browser.config.red 
-__CONFIG_EDITOR__: %notepad.exe ; in 06.edit-config-browser.red
+;__CONFIG_EDITOR__: %notepad.exe ; in 06.edit-config-browser.red
+__CONFIG_EDITOR__: "code" ; in 06.edit-config-browser.red
 if not value? '.redlang [
     do https://redlang.red
 ]
