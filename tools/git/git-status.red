@@ -32,12 +32,13 @@ Context [
         command: {git status}
 
         unless error? try [
-            either confirm (command) [
-                .call-powershell/out command
-            ][
-                print rejoin [{abort} " " command "."]
-                quit
-            ]
+            .call-powershell/out command
+            ; either confirm (command) [
+            ;     .call-powershell/out command
+            ; ][
+            ;     print rejoin [{abort} " " command "."]
+            ;     quit
+            ; ]
             
         ][
             print ["done"]
