@@ -9,7 +9,7 @@ Red [
         
     ]
     Builds:[
-        0.0.0.1.1.1
+        0.0.0.1.1.2 {run red}
     ]
     TODO: [
         1 {allow todo: 1.}
@@ -17,9 +17,10 @@ Red [
     ]
 ]
 
-; unless value?  '.get-short-filename [
-;     do https://redlang.red
-; ]
+unless value?  '.get-short-filename [
+    do https://redlang.red
+]
+.redlang [alias]
 
 .run: function [
     'param>executable-file [word! string! file! url! block! unset!] 
@@ -37,13 +38,20 @@ Red [
         return >builds
     ]
 
-    ;TODO: if Chrome, Explorer, Powershell, DOS, WSL,...
+    ;TODO: if Red Chrome, Explorer, Powershell, DOS, WSL,...
+
 
     switch/default type?/word get/any 'param>executable-file [
         unset! [
             print {TODO:}
         ]
-        word! string! file! url! block! [
+        word! [
+            if param>executable-file = 'red [
+                param>executable-file: SYSTEM/OPTIONS/BOOT
+                .run (param>executable-file)
+            ]
+        ]
+        string! file! url! [
             param>executable-file: form param>executable-file
             local>exe-file: to-local-file to-red-file param>executable-file
             ext: suffix? local>exe-file
@@ -55,11 +63,31 @@ Red [
                      call/show rejoin [{msiexec "} local>exe-file {"}]
                  ]
                  %.bat [
-                     print {TODO:}
+                     
+                     print {TODO:
+        template: {<%CompSpec%> /c <%local.system.path%>.System.bat ".backup/parallel {<%message%>}"}
+        cmd: build-markup/bind template context compose [
+            CompSpec: (select LIST-ENV "ComSpec")
+            local.system.path: (to-local-file .system.path)
+            message: (message)
+        ]
+
+        replace/all cmd "^/" ""
+        call cmd
+                     }
+
+                     call/show rejoin [
+                         (select LIST-ENV "ComSpec") ; "C:\WINDOWS\system32\cmd.exe"
+                         { /c } 
+                         {"} local>exe-file {"}
+                    ]
                  ]                 
              ][
                  print [ext "unknown."]
              ]
+        ]
+        block! [
+            print [{TODO:}]
         ]
     ] [
         throw error 'script 'expect-arg param>executable-file
