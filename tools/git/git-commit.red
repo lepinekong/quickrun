@@ -1,5 +1,5 @@
 Red [
-    Title: "git-commit.1.red"
+    Title: "git-commit.2.red"
     Builds: [
         0.0.0.1 {Initial build}
     ]
@@ -21,7 +21,8 @@ system/lexer/pre-load: func [src part][]
 unless value? '.redlang [
     do https://redlang.red
 ]
-.redlang [call-powershell string-expand alias]
+.redlang [call-powershell string-expand alias cache]
+.quickrun [git-status]
 
 .git-commit: function [
     {Commit and push to remote repository unless /no-push}
@@ -55,13 +56,12 @@ unless value? '.redlang [
         message: (message)
     ]
 
-  
-
     print "starting git commit..."
     unless error? try [
-        .call-powershell/out command
+        out: .call-powershell/out command
     ] [
         print ["commit done"]
+        .git-status ; 0.0.0.2.01.2
         return true
     ]
     return false
