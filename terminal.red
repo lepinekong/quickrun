@@ -40,11 +40,10 @@ unless value? '.redlang [
 
     switch/default type?/word get/any 'param>arg [
         unset! [
-            print {TODO:}
+            call {start cmd}
         ]
         word! string! file! url! block! [
             param>arg: form param>arg
-            call {start cmd}
         ]
     ] [
         throw error 'script 'expect-arg param>arg
