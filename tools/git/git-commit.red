@@ -67,4 +67,34 @@ unless value? '.redlang [
     return false
 ]
 
-.alias .git-commit [commit .commit git-commit .git-commit .cm cm]
+git-commit: function [
+    'param>message [word! string! file! url! block! unset!] 
+    /_build {Build number for developer}
+    /silent {don't print message on console}   
+    /_debug {debug mode} 
+][
+
+    >builds: 0.0.0.1.2.3
+
+    if _build [
+        unless silent [
+            print >builds
+        ]
+        return >builds
+    ]
+
+    switch/default type?/word get/any 'param>message [
+        unset! [
+            param>message: ask "commit message (Enter to cancel) : "
+        ]
+        word! string! file! url! block! [
+            param>message: form param>message
+        ]
+    ] [
+        throw error 'script 'expect-arg param>message
+    ]
+
+    .git-commit (param>message)
+]
+
+.alias git-commit [commit cm]
