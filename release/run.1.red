@@ -24,7 +24,6 @@ unless value?  '.get-short-filename [
 
 .run: function [
     'param>executable-file [word! string! file! url! block! unset!] 
-    /parallel ; TODO: see example .system\.code\.core\.facilities\.system.facilities.backup.red
     /_build {Build number for developer}
     /silent {don't print message on console}   
     /_debug {debug mode} 
@@ -94,5 +93,3 @@ unless value?  '.get-short-filename [
         throw error 'script 'expect-arg param>executable-file
     ]
 ]
-
-.alias .run [run]
