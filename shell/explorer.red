@@ -1,5 +1,6 @@
 Red [
     Title: "explorer.red"
+    Origin: "redlang.red\build\debug\download.red\0.0.0.1\01\cache\explorer.4.red"
 ]
 
 if not value? '.redlang [
@@ -38,7 +39,8 @@ if not value? '.redlang [
             >file-or-folder: %.
         ]
     ]
-    ?? >file-or-folder
+
+    while [find >file-or-folder "\\"][replace >file-or-folder "\\" "\"]
 
     ;--- get folder and file if any
     file-or-folder:  to-red-file form :>file-or-folder
@@ -47,18 +49,18 @@ if not value? '.redlang [
     .filename: get-short-filename file-or-folder
 
     .local-folder: to-local-file .folder
-    
-    replace .local-folder "\\" "\"
 
     ;--- call explorer
     
     either .filename [ ; 0.0.0.1.1.13
-        either ((dir? .filename) or (none? file-or-folder)) [ ; 0.0.0.1.02.4: fix for folder with // like download.red\0.0.0.1\01\tests\test.20.c.ko.red
+
+        either ((dir? .filename) or (none? file-or-folder))  [
             command: rejoin [{explorer.exe} { } {"} .local-folder {"}]
         ][
             command: rejoin [{explorer.exe} { } {/select,} { } {"} to-local-file clean-path file-or-folder {"}]
         ]
     ][
+
         command: rejoin [{explorer.exe} { } {"} .local-folder {"}]
     ]
 
@@ -66,10 +68,11 @@ if not value? '.redlang [
 
     if _debug [
         ?? command
+        ;start explorer.exe -ArgumentList "/select, `"$demofolder\$demo.red`""
+        ask "71"
     ]
     call/show command
-
-    ;start explorer.exe -ArgumentList "/select, `"$demofolder\$demo.red`""
+    
 ]
 
 explorer: :.explorer
