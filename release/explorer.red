@@ -14,7 +14,6 @@ if not value? '.redlang [
 ][
 
     >builds: [
-        0.0.0.2.2 {}
         0.0.0.1.9 {initial release}
     ]
 
