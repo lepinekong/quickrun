@@ -53,7 +53,7 @@ if not value? '.redlang [
     ;--- call explorer
     
     either .filename [ ; 0.0.0.1.1.13
-        either ((dir? .filename) or (none? file-or-folder)) [ ; 0.0.0.1.02.4: fix for folder with // like download.red\0.0.0.1\01\tests\test.20.c.ko.red
+        either ((dir? .filename) or (none? file-or-folder)) [ ; 0.0.0.1.02.4
             command: rejoin [{explorer.exe} { } {"} .local-folder {"}]
         ][
             command: rejoin [{explorer.exe} { } {/select,} { } {"} to-local-file clean-path file-or-folder {"}]
