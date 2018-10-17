@@ -6,7 +6,7 @@ if not value? '.redlang [
     do https://redlang.red
 ]
 
-explorer: function [
+.explorer: function [
     '>file-or-folder [any-type! unset!]
     /_build
     /silent
@@ -69,3 +69,5 @@ explorer: function [
 
     ;start explorer.exe -ArgumentList "/select, `"$demofolder\$demo.red`""
 ]
+
+explorer: :.explorer
