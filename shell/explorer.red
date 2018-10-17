@@ -47,7 +47,8 @@ if not value? '.redlang [
     .filename: get-short-filename file-or-folder
 
     .local-folder: to-local-file .folder
-
+    
+    replace .local-folder "\\" "\"
 
     ;--- call explorer
     
