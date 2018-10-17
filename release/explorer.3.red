@@ -1,6 +1,6 @@
 Red [
     Title: "explorer.red"
-    Origin: "redlang.red\build\debug\download.red\0.0.0.1\02\cache\explorer.1.red"
+    Origin: "redlang.red\build\debug\download.red\0.0.0.1\01\cache\explorer.4.red"
 ]
 
 if not value? '.redlang [
@@ -48,9 +48,7 @@ if not value? '.redlang [
 
     ;--- get folder and file if any
     file-or-folder:  to-red-file form :>file-or-folder
-
-    ;.folder: clean-path .get-folder file-or-folder ; 0.0.0.1.02.6
-    .folder: clean-path .get-folder (file-or-folder) ; 0.0.0.1.02.6
+    .folder: clean-path .get-folder file-or-folder
 
     .filename: get-short-filename file-or-folder
 
