@@ -15,7 +15,7 @@ if not value? '.redlang [
 ][
 
     >builds: [
-        0.0.0.2.2 {}
+        0.0.0.2.5 {alpha version}
         0.0.0.1.9 {initial release}
     ]
 
@@ -24,6 +24,10 @@ if not value? '.redlang [
             ?? >builds
         ]
         return >builds
+    ]
+
+    if _debug [
+        .redlang [do-trace]
     ]
 
     ;--- requires
@@ -67,9 +71,12 @@ if not value? '.redlang [
     
 
     if _debug [
-        ?? command
+
+        do-trace 75 [
+            ?? command
+        ] %explorer.5.red
+
         ;start explorer.exe -ArgumentList "/select, `"$demofolder\$demo.red`""
-        ask "71"
     ]
     call/show command
     
