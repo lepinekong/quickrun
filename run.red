@@ -58,7 +58,7 @@ unless value?  '.get-short-filename [
             ext: suffix? local>exe-file
              switch/default ext [
                  %.exe [
-                     call/show rejoin [{"} local>exe-file {"}]
+                     call/show rejoin ["cmd /c " {"} local>exe-file {"}]
                  ]
                  %.msi [
                      call/show rejoin [{msiexec "} local>exe-file {"}]
