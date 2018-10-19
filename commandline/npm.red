@@ -1,4 +1,4 @@
-; // -------------------  header file  ------------------
+; / -------------------  header file  ------------------
 Red [
     File: "npm"
     Title: "npm"
@@ -19,14 +19,14 @@ Red [
 ]
 
 
-; // -------------------  load libraries  ------------------
+; / -------------------  load libraries  ------------------
 unless value? '.redlang [
     do https://redlang.red
 ]
 .redlang [cd do-events alias]
 
 
-; // -------------------  npm function  ------------------
+; / -------------------  npm function  ------------------
 .npm: function [
     {Usage: 
     - version or npm version: get version
@@ -163,7 +163,7 @@ unless value? '.redlang [
 .alias .npm [npm]
 
 
-; // -------------------  npm install function  ------------------
+; / -------------------  npm install function  ------------------
 .npm-install: function [
     {Will install a package with options
 
@@ -233,7 +233,7 @@ unless value? '.redlang [
 .alias .npm-install [npm-install]
 
 
-; // -------------------  npm update function  ------------------
+; / -------------------  npm update function  ------------------
 .npm-update: function [
     {Update package}
     '>package {package name or all}
@@ -265,7 +265,7 @@ unless value? '.redlang [
 .alias .npm-update [npm-update]
 
 
-; // -------------------  npm uninstall function  ------------------
+; / -------------------  npm uninstall function  ------------------
 .npm-uninstall: function [
     {Will uninstall a package with options
 
@@ -331,7 +331,7 @@ unless value? '.redlang [
 .alias .npm-uninstall [npm-uninstall]
 
 
-; // -------------------  npm search function  ------------------
+; / -------------------  npm search function  ------------------
 .npm-search: function ['>package][
     package: form >package
     npm-command: rejoin [{search} { } package]
@@ -341,7 +341,7 @@ unless value? '.redlang [
 .alias .npm-search [npm-search]
 
 
-; // -------------------  npm list function  ------------------
+; / -------------------  npm list function  ------------------
 .npm-list: function [/locally][
     npm-command: "list"
     either locally [
@@ -354,7 +354,7 @@ unless value? '.redlang [
 .alias .npm-list [npm-list]
 
 
-; // -------------------  npm docs function  ------------------
+; / -------------------  npm docs function  ------------------
 .npm-docs: function ['>package][
     package: form >package
     npm-command: rejoin [{docs} { } package]
@@ -368,7 +368,7 @@ unless value? '.redlang [
 
 
 
-; // -------------------  npm boot  ------------------
+; / -------------------  npm boot  ------------------
 .npm/boot
 print "" ; weird without this line next line doesn't execute
 
