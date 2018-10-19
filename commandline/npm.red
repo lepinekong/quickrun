@@ -1,20 +1,28 @@
 Red [
-    Title: "npm.red"
-    .links: [
-        https://www.sitepoint.com/beginners-guide-node-package-manager/
-        https://docs.npmjs.com/getting-started/installing-npm-packages-locally
-        https://kapeli.com/cheat_sheets/npm.docset/Contents/Resources/Documents/index
-        https://firstdoit.com/no-need-for-globals-using-npm-dependencies-in-npm-scripts-3dfb478908
-
-        https://medium.freecodecamp.org/how-to-make-a-beautiful-tiny-npm-package-and-publish-it-2881d4307f78
+    File: "npm"
+    Title: "npm"
+    Html-Proxy: 
+    Description: {
+        
+    }
+    Features: [
+        
     ]
-    Build: [0.0.0.1.20 {First version}]
+    Builds:[
+        [0.0.0.1.01.1 {  }]
+    ]
+    TODO: [
+        1 {allow todo: 1.}
+        2 {...}
+    ]
 ]
 
-do https://redlang.red/cd
-do https://redlang.red/do-events
+unless value? '.redlang [
+    do https://redlang.red
+]
+.redlang [cd do-events alias]
 
-npm: function [
+.npm: function [
     {Usage: 
     - version or npm version: get version
     - global or npm global: get global install directory
@@ -87,13 +95,13 @@ npm: function [
         ; code generation for keyword functions
         ; example for list keyword:
         ; list: function[][npm list]
-        forall shortcuts-list [
-            shortcut: shortcuts-list/1
-            block-code: copy [npm]
-            append block-code shortcut
-            f: function[] block-code
-            set in system/words shortcut :f
-        ]
+        ; forall shortcuts-list [
+        ;     shortcut: shortcuts-list/1
+        ;     block-code: copy [npm]
+        ;     append block-code shortcut
+        ;     f: function[] block-code
+        ;     set in system/words shortcut :f
+        ; ]
         return true
     ]
     ;-------------------------------------------------
@@ -147,8 +155,9 @@ npm: function [
     print out
     return out
 ]
+.alias .npm [npm]
 
-install: function [
+.npm-install: function [
     {Will install a package with options
 
     Usage examples:
@@ -214,7 +223,9 @@ install: function [
     ]
 ]
 
-update: function [
+.alias .npm-install [npm-install]
+
+.npm-update: function [
     {Update package}
     '>package {package name or all}
     /global
@@ -242,7 +253,9 @@ update: function [
     npm/no-options (npm-command)
 ]
 
-uninstall: function [
+.alias .npm-update [npm-update]
+
+.uninstall: function [
     {Will uninstall a package with options
 
     Usage examples:
@@ -304,27 +317,33 @@ uninstall: function [
     ]
 ]
 
-search: function ['>package][
+.alias .npm-uninstall [npm-uninstall]
+
+.npm-search: function ['>package][
     package: form >package
     npm-command: rejoin [{search} { } package]
     npm/no-confirmation (npm-command) 
 ]
 
-docs: function ['>package][
+.alias .npm-search [npm-search]
+
+.npm-docs: function ['>package][
     package: form >package
     npm-command: rejoin [{docs} { } package]
     npm/no-confirmation (npm-command) 
 ]
+
+.alias .npm-docs [npm-docs]
 
 ;help npm
 ;npm version
 ;npm cache
 ;npm config
 
-npm/boot
+.npm/boot
 print "" ; weird without this line next line doesn't execute
 
-list: function [/locally][
+.npm-list: function [/locally][
     npm-command: "list"
     either locally [
         npm/no-confirmation/locally (npm-command)         
@@ -332,6 +351,8 @@ list: function [/locally][
         npm/no-confirmation (npm-command)          
     ]
 ]
+
+.alias .npm-list [npm-list]
 
 
 help npm
