@@ -255,7 +255,7 @@ unless value? '.redlang [
 
 .alias .npm-update [npm-update]
 
-.uninstall: function [
+.npm-uninstall: function [
     {Will uninstall a package with options
 
     Usage examples:
